@@ -1,0 +1,16 @@
+X86 CoWR0001
+"Rfi Fre"
+Cycle=Rfi Fre
+Relax=Rfi
+Safe=Fre
+Generator=diy7 (version 7.49)
+Prefetch=
+Com=Fr
+Orig=Rfi Fre
+{
+}
+ P0          ;
+ MOV [x],$1  ;
+ MOV EAX,[x] ;
+exists
+(0:EAX=1)

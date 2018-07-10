@@ -1,0 +1,17 @@
+X86 SB013
+"PodWW PodWR Fre PodWW PodWR Fre"
+Cycle=Fre PodWW PodWR Fre PodWW PodWR
+Relax=PodWR
+Safe=Fre PodWW
+Generator=diy7 (version 7.49)
+Prefetch=0:x=F,0:z=T,1:z=F,1:x=T
+Com=Fr Fr
+Orig=PodWW PodWR Fre PodWW PodWR Fre
+{
+}
+ P0          | P1          ;
+ MOV [x],$1  | MOV [z],$1  ;
+ MOV [y],$1  | MOV [a],$1  ;
+ MOV EAX,[z] | MOV EAX,[x] ;
+exists
+(0:EAX=0 /\ 1:EAX=0)

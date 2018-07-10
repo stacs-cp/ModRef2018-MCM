@@ -1,0 +1,16 @@
+X86 CoRW1000
+"Fri Rfe"
+Cycle=Rfe Fri
+Relax=Rfe
+Safe=Fri
+Generator=diy7 (version 7.49)
+Prefetch=
+Com=Rf
+Orig=Fri Rfe
+{
+}
+ P0          ;
+ MOV EAX,[x] ;
+ MOV [x],$1  ;
+exists
+(0:EAX=0)

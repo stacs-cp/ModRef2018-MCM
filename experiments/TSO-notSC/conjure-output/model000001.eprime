@@ -1,0 +1,1408 @@
+language ESSENCE' 1.0
+
+given CORE_EnumSize: int
+given REGISTER_EnumSize: int
+given VARIABLE_EnumSize: int
+given VALUE_EnumSize: int
+given maxNbOperationsPerCore: int(1..)
+given MCM: int(1..2)
+find program_Function1DR14_ExplicitBounded_Length:
+        matrix indexed by [int(1..CORE_EnumSize)] of int(0..maxNbOperationsPerCore)
+find program_Function1DR14_ExplicitBounded_Values__tag:
+        matrix indexed by [int(1..CORE_EnumSize), int(1..maxNbOperationsPerCore)] of int(1..2)
+find program_Function1DR14_ExplicitBounded_Values_load_register:
+        matrix indexed by [int(1..CORE_EnumSize), int(1..maxNbOperationsPerCore)] of int(1..REGISTER_EnumSize)
+find program_Function1DR14_ExplicitBounded_Values_load_variable:
+        matrix indexed by [int(1..CORE_EnumSize), int(1..maxNbOperationsPerCore)] of int(1..VARIABLE_EnumSize)
+find program_Function1DR14_ExplicitBounded_Values_store_variable:
+        matrix indexed by [int(1..CORE_EnumSize), int(1..maxNbOperationsPerCore)] of int(1..VARIABLE_EnumSize)
+find program_Function1DR14_ExplicitBounded_Values_store_value:
+        matrix indexed by [int(1..CORE_EnumSize), int(1..maxNbOperationsPerCore)] of int(1..VALUE_EnumSize)
+letting maxNbOperationsInExec be 1 + maxNbOperationsPerCore * sum([1 | c : int(1..CORE_EnumSize)])
+find execution_ExplicitBounded_Length: int(0..maxNbOperationsInExec)
+find execution_ExplicitBounded_Values_1: matrix indexed by [int(1..maxNbOperationsInExec)] of int(1..CORE_EnumSize)
+find execution_ExplicitBounded_Values_2__tag: matrix indexed by [int(1..maxNbOperationsInExec)] of int(1..2)
+find execution_ExplicitBounded_Values_2_load_register:
+        matrix indexed by [int(1..maxNbOperationsInExec)] of int(1..REGISTER_EnumSize)
+find execution_ExplicitBounded_Values_2_load_variable:
+        matrix indexed by [int(1..maxNbOperationsInExec)] of int(1..VARIABLE_EnumSize)
+find execution_ExplicitBounded_Values_2_store_variable:
+        matrix indexed by [int(1..maxNbOperationsInExec)] of int(1..VARIABLE_EnumSize)
+find execution_ExplicitBounded_Values_2_store_value:
+        matrix indexed by [int(1..maxNbOperationsInExec)] of int(1..VALUE_EnumSize)
+find step_of_registers_ExplicitBoundedR11_Length: int(0..maxNbOperationsInExec)
+find step_of_registers_ExplicitBoundedR11_Values_FunctionND:
+        matrix indexed by [int(1..maxNbOperationsInExec), int(1..CORE_EnumSize),
+                           int(1..REGISTER_EnumSize)] of int(1..VALUE_EnumSize)
+find step_of_variables_ExplicitBoundedR9_Length: int(0..maxNbOperationsInExec)
+find step_of_variables_ExplicitBoundedR9_Values_Function1D:
+        matrix indexed by [int(1..maxNbOperationsInExec), int(1..VARIABLE_EnumSize)] of int(1..VALUE_EnumSize)
+given initial_step_of_registers: int(1..VALUE_EnumSize)
+given initial_step_of_variables: int(1..VALUE_EnumSize)
+given fin1: int
+given final_step_of_registers_FunctionAsRelation_RelationAsSet_Explicit_1_1:
+        matrix indexed by [int(1..fin1)] of int(1..CORE_EnumSize)
+given final_step_of_registers_FunctionAsRelation_RelationAsSet_Explicit_1_2:
+        matrix indexed by [int(1..fin1)] of int(1..REGISTER_EnumSize)
+given final_step_of_registers_FunctionAsRelation_RelationAsSet_Explicit_2:
+        matrix indexed by [int(1..fin1)] of int(1..VALUE_EnumSize)
+given fin2: int
+given final_step_of_variables_FunctionAsRelation_RelationAsSet_Explicit_1:
+        matrix indexed by [int(1..fin2)] of int(1..VARIABLE_EnumSize)
+given final_step_of_variables_FunctionAsRelation_RelationAsSet_Explicit_2:
+        matrix indexed by [int(1..fin2)] of int(1..VALUE_EnumSize)
+given fin3: int
+given fin4: int
+given fin5: int
+given include_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Length:
+        matrix indexed by [int(1..fin3), int(1..CORE_EnumSize)] of int(0..fin5)
+given include_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values__tag:
+        matrix indexed by [int(1..fin3), int(1..CORE_EnumSize), int(1..fin5)] of int(1..2)
+given include_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values_load_register:
+        matrix indexed by [int(1..fin3), int(1..CORE_EnumSize), int(1..fin5)] of int(1..REGISTER_EnumSize)
+given include_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values_load_variable:
+        matrix indexed by [int(1..fin3), int(1..CORE_EnumSize), int(1..fin5)] of int(1..VARIABLE_EnumSize)
+given include_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values_store_variable:
+        matrix indexed by [int(1..fin3), int(1..CORE_EnumSize), int(1..fin5)] of int(1..VARIABLE_EnumSize)
+given include_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values_store_value:
+        matrix indexed by [int(1..fin3), int(1..CORE_EnumSize), int(1..fin5)] of int(1..VALUE_EnumSize)
+given fin6: int
+given fin7: int
+given fin8: int
+given exclude_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Length:
+        matrix indexed by [int(1..fin6), int(1..CORE_EnumSize)] of int(0..fin8)
+given exclude_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values__tag:
+        matrix indexed by [int(1..fin6), int(1..CORE_EnumSize), int(1..fin8)] of int(1..2)
+given exclude_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values_load_register:
+        matrix indexed by [int(1..fin6), int(1..CORE_EnumSize), int(1..fin8)] of int(1..REGISTER_EnumSize)
+given exclude_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values_load_variable:
+        matrix indexed by [int(1..fin6), int(1..CORE_EnumSize), int(1..fin8)] of int(1..VARIABLE_EnumSize)
+given exclude_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values_store_variable:
+        matrix indexed by [int(1..fin6), int(1..CORE_EnumSize), int(1..fin8)] of int(1..VARIABLE_EnumSize)
+given exclude_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values_store_value:
+        matrix indexed by [int(1..fin6), int(1..CORE_EnumSize), int(1..fin8)] of int(1..VALUE_EnumSize)
+branching on
+    [program_Function1DR14_ExplicitBounded_Length, program_Function1DR14_ExplicitBounded_Values__tag,
+     program_Function1DR14_ExplicitBounded_Values_load_register,
+     program_Function1DR14_ExplicitBounded_Values_load_variable,
+     program_Function1DR14_ExplicitBounded_Values_store_variable,
+     program_Function1DR14_ExplicitBounded_Values_store_value]
+such that
+    and([and([q103 <= program_Function1DR14_ExplicitBounded_Length[q99] ->
+              1 =
+              sum([toInt(q101 <= execution_ExplicitBounded_Length) *
+                   catchUndef(toInt(q99 = execution_ExplicitBounded_Values_1[q101] /\
+                                    (program_Function1DR14_ExplicitBounded_Values__tag[q99, q103] =
+                                     execution_ExplicitBounded_Values_2__tag[q101]
+                                     /\
+                                     ((1 = program_Function1DR14_ExplicitBounded_Values__tag[q99, q103] ->
+                                       program_Function1DR14_ExplicitBounded_Values_load_register[q99, q103] =
+                                       execution_ExplicitBounded_Values_2_load_register[q101]
+                                       /\
+                                       program_Function1DR14_ExplicitBounded_Values_load_variable[q99, q103] =
+                                       execution_ExplicitBounded_Values_2_load_variable[q101])
+                                      /\
+                                      (2 = program_Function1DR14_ExplicitBounded_Values__tag[q99, q103] ->
+                                       program_Function1DR14_ExplicitBounded_Values_store_variable[q99, q103] =
+                                       execution_ExplicitBounded_Values_2_store_variable[q101]
+                                       /\
+                                       program_Function1DR14_ExplicitBounded_Values_store_value[q99, q103] =
+                                       execution_ExplicitBounded_Values_2_store_value[q101])))),
+                              0)
+                       | q101 : int(1..maxNbOperationsInExec)])
+                  | q103 : int(1..maxNbOperationsPerCore)])
+             | q99 : int(1..CORE_EnumSize)]),
+    execution_ExplicitBounded_Length =
+    sum([program_Function1DR14_ExplicitBounded_Length[q20] | q20 : int(1..CORE_EnumSize)]),
+    MCM = 1 ->
+    and([and([q25 <= program_Function1DR14_ExplicitBounded_Length[q24] /\
+              q26 <= program_Function1DR14_ExplicitBounded_Length[q24]
+              ->
+              (q25 < q26 ->
+               or([q21 <= execution_ExplicitBounded_Length /\ q22 <= execution_ExplicitBounded_Length /\
+                   (q21 < q22 /\
+                    (execution_ExplicitBounded_Values_1[q21] = q24 /\
+                     (execution_ExplicitBounded_Values_2__tag[q21] =
+                      program_Function1DR14_ExplicitBounded_Values__tag[q24, q25]
+                      /\
+                      ((1 = execution_ExplicitBounded_Values_2__tag[q21] ->
+                        execution_ExplicitBounded_Values_2_load_register[q21] =
+                        program_Function1DR14_ExplicitBounded_Values_load_register[q24, q25]
+                        /\
+                        execution_ExplicitBounded_Values_2_load_variable[q21] =
+                        program_Function1DR14_ExplicitBounded_Values_load_variable[q24, q25])
+                       /\
+                       (2 = execution_ExplicitBounded_Values_2__tag[q21] ->
+                        execution_ExplicitBounded_Values_2_store_variable[q21] =
+                        program_Function1DR14_ExplicitBounded_Values_store_variable[q24, q25]
+                        /\
+                        execution_ExplicitBounded_Values_2_store_value[q21] =
+                        program_Function1DR14_ExplicitBounded_Values_store_value[q24, q25]))
+                      /\ q25 <= program_Function1DR14_ExplicitBounded_Length[q24])
+                     /\ q21 <= execution_ExplicitBounded_Length)
+                    /\
+                    (execution_ExplicitBounded_Values_1[q22] = q24 /\
+                     (execution_ExplicitBounded_Values_2__tag[q22] =
+                      program_Function1DR14_ExplicitBounded_Values__tag[q24, q26]
+                      /\
+                      ((1 = execution_ExplicitBounded_Values_2__tag[q22] ->
+                        execution_ExplicitBounded_Values_2_load_register[q22] =
+                        program_Function1DR14_ExplicitBounded_Values_load_register[q24, q26]
+                        /\
+                        execution_ExplicitBounded_Values_2_load_variable[q22] =
+                        program_Function1DR14_ExplicitBounded_Values_load_variable[q24, q26])
+                       /\
+                       (2 = execution_ExplicitBounded_Values_2__tag[q22] ->
+                        execution_ExplicitBounded_Values_2_store_variable[q22] =
+                        program_Function1DR14_ExplicitBounded_Values_store_variable[q24, q26]
+                        /\
+                        execution_ExplicitBounded_Values_2_store_value[q22] =
+                        program_Function1DR14_ExplicitBounded_Values_store_value[q24, q26]))
+                      /\ q26 <= program_Function1DR14_ExplicitBounded_Length[q24])
+                     /\ q22 <= execution_ExplicitBounded_Length))
+                       | q21 : int(1..maxNbOperationsInExec), q22 : int(1..maxNbOperationsInExec)]))
+                  | q25 : int(1..maxNbOperationsPerCore), q26 : int(1..maxNbOperationsPerCore)])
+             | q24 : int(1..CORE_EnumSize)]),
+    MCM = 2 ->
+    and([and([q31 <= program_Function1DR14_ExplicitBounded_Length[q30] /\
+              q32 <= program_Function1DR14_ExplicitBounded_Length[q30]
+              ->
+              (q31 < q32 /\
+               !(program_Function1DR14_ExplicitBounded_Values__tag[q30, q31] = 2 /\
+                 q31 <= program_Function1DR14_ExplicitBounded_Length[q30]
+                 /\
+                 (program_Function1DR14_ExplicitBounded_Values__tag[q30, q32] = 1 /\
+                  q32 <= program_Function1DR14_ExplicitBounded_Length[q30]))
+               ->
+               or([q27 <= execution_ExplicitBounded_Length /\ q28 <= execution_ExplicitBounded_Length /\
+                   (q27 < q28 /\
+                    (execution_ExplicitBounded_Values_1[q27] = q30 /\
+                     (execution_ExplicitBounded_Values_2__tag[q27] =
+                      program_Function1DR14_ExplicitBounded_Values__tag[q30, q31]
+                      /\
+                      ((1 = execution_ExplicitBounded_Values_2__tag[q27] ->
+                        execution_ExplicitBounded_Values_2_load_register[q27] =
+                        program_Function1DR14_ExplicitBounded_Values_load_register[q30, q31]
+                        /\
+                        execution_ExplicitBounded_Values_2_load_variable[q27] =
+                        program_Function1DR14_ExplicitBounded_Values_load_variable[q30, q31])
+                       /\
+                       (2 = execution_ExplicitBounded_Values_2__tag[q27] ->
+                        execution_ExplicitBounded_Values_2_store_variable[q27] =
+                        program_Function1DR14_ExplicitBounded_Values_store_variable[q30, q31]
+                        /\
+                        execution_ExplicitBounded_Values_2_store_value[q27] =
+                        program_Function1DR14_ExplicitBounded_Values_store_value[q30, q31]))
+                      /\ q31 <= program_Function1DR14_ExplicitBounded_Length[q30])
+                     /\ q27 <= execution_ExplicitBounded_Length)
+                    /\
+                    (execution_ExplicitBounded_Values_1[q28] = q30 /\
+                     (execution_ExplicitBounded_Values_2__tag[q28] =
+                      program_Function1DR14_ExplicitBounded_Values__tag[q30, q32]
+                      /\
+                      ((1 = execution_ExplicitBounded_Values_2__tag[q28] ->
+                        execution_ExplicitBounded_Values_2_load_register[q28] =
+                        program_Function1DR14_ExplicitBounded_Values_load_register[q30, q32]
+                        /\
+                        execution_ExplicitBounded_Values_2_load_variable[q28] =
+                        program_Function1DR14_ExplicitBounded_Values_load_variable[q30, q32])
+                       /\
+                       (2 = execution_ExplicitBounded_Values_2__tag[q28] ->
+                        execution_ExplicitBounded_Values_2_store_variable[q28] =
+                        program_Function1DR14_ExplicitBounded_Values_store_variable[q30, q32]
+                        /\
+                        execution_ExplicitBounded_Values_2_store_value[q28] =
+                        program_Function1DR14_ExplicitBounded_Values_store_value[q30, q32]))
+                      /\ q32 <= program_Function1DR14_ExplicitBounded_Length[q30])
+                     /\ q28 <= execution_ExplicitBounded_Length))
+                       | q27 : int(1..maxNbOperationsInExec), q28 : int(1..maxNbOperationsInExec)]))
+                  | q31 : int(1..maxNbOperationsPerCore), q32 : int(1..maxNbOperationsPerCore)])
+             | q30 : int(1..CORE_EnumSize)]),
+    and([step_of_registers_ExplicitBoundedR11_Values_FunctionND
+             [step_of_registers_ExplicitBoundedR11_Length,
+              final_step_of_registers_FunctionAsRelation_RelationAsSet_Explicit_1_1[q34],
+              final_step_of_registers_FunctionAsRelation_RelationAsSet_Explicit_1_2[q34]]
+         = final_step_of_registers_FunctionAsRelation_RelationAsSet_Explicit_2[q34]
+         /\ step_of_registers_ExplicitBoundedR11_Length <= step_of_registers_ExplicitBoundedR11_Length
+             | q34 : int(1..fin1)]),
+    and([step_of_variables_ExplicitBoundedR9_Values_Function1D
+             [step_of_variables_ExplicitBoundedR9_Length,
+              final_step_of_variables_FunctionAsRelation_RelationAsSet_Explicit_1[q36]]
+         = final_step_of_variables_FunctionAsRelation_RelationAsSet_Explicit_2[q36]
+         /\ step_of_variables_ExplicitBoundedR9_Length <= step_of_variables_ExplicitBoundedR9_Length
+             | q36 : int(1..fin2)]),
+    and([and([step_of_registers_ExplicitBoundedR11_Values_FunctionND[1, q3, r] = initial_step_of_registers /\
+              1 <= step_of_registers_ExplicitBoundedR11_Length
+                  | q3 : int(1..CORE_EnumSize)])
+             | r : int(1..REGISTER_EnumSize)]),
+    and([step_of_variables_ExplicitBoundedR9_Values_Function1D[1, v] = initial_step_of_variables /\
+         1 <= step_of_variables_ExplicitBoundedR9_Length
+             | v : int(1..VARIABLE_EnumSize)]),
+    and([q105 <= step_of_variables_ExplicitBoundedR9_Length ->
+         and([step_of_variables_ExplicitBoundedR9_Values_Function1D[q105, q107] != initial_step_of_registers
+                  | q107 : int(1..VARIABLE_EnumSize)])
+             | q105 : int(1..maxNbOperationsInExec)]),
+    and([q39 <= step_of_registers_ExplicitBoundedR11_Length ->
+         (q39 != 1 ->
+          and([initial_step_of_registers = step_of_registers_ExplicitBoundedR11_Values_FunctionND[q39, q40_1, q40_2] ->
+               initial_step_of_registers = step_of_registers_ExplicitBoundedR11_Values_FunctionND[q39 - 1, q40_1, q40_2]
+               /\ q39 - 1 <= step_of_registers_ExplicitBoundedR11_Length
+                   | q40_1 : int(1..CORE_EnumSize), q40_2 : int(1..REGISTER_EnumSize)]))
+             | q39 : int(1..maxNbOperationsInExec)]),
+    and([q42 <= execution_ExplicitBounded_Length ->
+         and([execution_ExplicitBounded_Values_2__tag[q42] = 1 ->
+              and([and([and([step_of_registers_ExplicitBoundedR11_Values_FunctionND
+                                 [q42 + 1, execution_ExplicitBounded_Values_1[q42],
+                                  execution_ExplicitBounded_Values_2_load_register[q42]]
+                             =
+                             step_of_variables_ExplicitBoundedR9_Values_Function1D
+                                 [q42, execution_ExplicitBounded_Values_2_load_variable[q42]],
+                             execution_ExplicitBounded_Values_2__tag[q42] = 1,
+                             execution_ExplicitBounded_Values_2__tag[q42] = 1;
+                                 int(1..3)]),
+                        q42 + 1 <= step_of_registers_ExplicitBoundedR11_Length,
+                        q42 <= step_of_variables_ExplicitBoundedR9_Length;
+                            int(1..3)]),
+                   and([r != execution_ExplicitBounded_Values_2_load_register[q42] /\
+                        execution_ExplicitBounded_Values_2__tag[q42] = 1
+                        ->
+                        and([step_of_registers_ExplicitBoundedR11_Values_FunctionND
+                                 [q42 + 1, execution_ExplicitBounded_Values_1[q42], r]
+                             =
+                             step_of_registers_ExplicitBoundedR11_Values_FunctionND
+                                 [q42, execution_ExplicitBounded_Values_1[q42], r],
+                             q42 + 1 <= step_of_registers_ExplicitBoundedR11_Length,
+                             q42 <= step_of_registers_ExplicitBoundedR11_Length;
+                                 int(1..3)])
+                            | r : int(1..REGISTER_EnumSize)]),
+                   and([and([step_of_variables_ExplicitBoundedR9_Values_Function1D[q42 + 1, v] =
+                             step_of_variables_ExplicitBoundedR9_Values_Function1D[q42, v],
+                             q42 + 1 <= step_of_variables_ExplicitBoundedR9_Length,
+                             q42 <= step_of_variables_ExplicitBoundedR9_Length;
+                                 int(1..3)])
+                            | v : int(1..VARIABLE_EnumSize)]);
+                       int(1..3)]),
+              execution_ExplicitBounded_Values_2__tag[q42] = 2 ->
+              and([and([step_of_variables_ExplicitBoundedR9_Values_Function1D
+                            [q42 + 1, execution_ExplicitBounded_Values_2_store_variable[q42]]
+                        = execution_ExplicitBounded_Values_2_store_value[q42],
+                        execution_ExplicitBounded_Values_2__tag[q42] = 2,
+                        execution_ExplicitBounded_Values_2__tag[q42] = 2;
+                            int(1..3)])
+                   /\ q42 + 1 <= step_of_variables_ExplicitBoundedR9_Length,
+                   and([and([step_of_registers_ExplicitBoundedR11_Values_FunctionND
+                                 [q42 + 1, execution_ExplicitBounded_Values_1[q42], r]
+                             =
+                             step_of_registers_ExplicitBoundedR11_Values_FunctionND
+                                 [q42, execution_ExplicitBounded_Values_1[q42], r],
+                             q42 + 1 <= step_of_registers_ExplicitBoundedR11_Length,
+                             q42 <= step_of_registers_ExplicitBoundedR11_Length;
+                                 int(1..3)])
+                            | r : int(1..REGISTER_EnumSize)]),
+                   and([v != execution_ExplicitBounded_Values_2_store_variable[q42] /\
+                        execution_ExplicitBounded_Values_2__tag[q42] = 2
+                        ->
+                        and([step_of_variables_ExplicitBoundedR9_Values_Function1D[q42 + 1, v] =
+                             step_of_variables_ExplicitBoundedR9_Values_Function1D[q42, v],
+                             q42 + 1 <= step_of_variables_ExplicitBoundedR9_Length,
+                             q42 <= step_of_variables_ExplicitBoundedR9_Length;
+                                 int(1..3)])
+                            | v : int(1..VARIABLE_EnumSize)]);
+                       int(1..3)]),
+              and([q4 != execution_ExplicitBounded_Values_1[q42] ->
+                   and([and([step_of_registers_ExplicitBoundedR11_Values_FunctionND[q42 + 1, q4, r] =
+                             step_of_registers_ExplicitBoundedR11_Values_FunctionND[q42, q4, r],
+                             q42 + 1 <= step_of_registers_ExplicitBoundedR11_Length,
+                             q42 <= step_of_registers_ExplicitBoundedR11_Length;
+                                 int(1..3)])
+                            | r : int(1..REGISTER_EnumSize)])
+                       | q4 : int(1..CORE_EnumSize)]);
+                  int(1..3)])
+             | q42 : int(1..maxNbOperationsInExec)]),
+    execution_ExplicitBounded_Length + 1 = step_of_variables_ExplicitBoundedR9_Length,
+    execution_ExplicitBounded_Length + 1 = step_of_registers_ExplicitBoundedR11_Length,
+    fin3 > 0 ->
+    or([and([and([q48 <= program_Function1DR14_ExplicitBounded_Length[q46] ->
+                  include_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values__tag[q44, q46, q48] =
+                  program_Function1DR14_ExplicitBounded_Values__tag[q46, q48]
+                  /\
+                  ((1 = include_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values__tag[q44, q46, q48] ->
+                    include_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values_load_register[q44, q46, q48] =
+                    program_Function1DR14_ExplicitBounded_Values_load_register[q46, q48]
+                    /\
+                    include_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values_load_variable[q44, q46, q48] =
+                    program_Function1DR14_ExplicitBounded_Values_load_variable[q46, q48])
+                   /\
+                   (2 = include_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values__tag[q44, q46, q48] ->
+                    include_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values_store_variable[q44, q46, q48] =
+                    program_Function1DR14_ExplicitBounded_Values_store_variable[q46, q48]
+                    /\
+                    include_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values_store_value[q44, q46, q48] =
+                    program_Function1DR14_ExplicitBounded_Values_store_value[q46, q48]))
+                  /\ q48 <= include_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Length[q44, q46]
+                      | q48 : int(1..maxNbOperationsPerCore)])
+             /\
+             and([program_Function1DR14_ExplicitBounded_Values__tag[q46, q49] =
+                  include_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values__tag[q44, q46, q49]
+                  /\
+                  ((1 = program_Function1DR14_ExplicitBounded_Values__tag[q46, q49] ->
+                    program_Function1DR14_ExplicitBounded_Values_load_register[q46, q49] =
+                    include_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values_load_register[q44, q46, q49]
+                    /\
+                    program_Function1DR14_ExplicitBounded_Values_load_variable[q46, q49] =
+                    include_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values_load_variable[q44, q46, q49])
+                   /\
+                   (2 = program_Function1DR14_ExplicitBounded_Values__tag[q46, q49] ->
+                    program_Function1DR14_ExplicitBounded_Values_store_variable[q46, q49] =
+                    include_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values_store_variable[q44, q46, q49]
+                    /\
+                    program_Function1DR14_ExplicitBounded_Values_store_value[q46, q49] =
+                    include_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values_store_value[q44, q46, q49]))
+                  /\ q49 <= program_Function1DR14_ExplicitBounded_Length[q46]
+                      | q49 : int(1..fin5),
+                        q49 <= include_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Length[q44, q46]])
+             /\
+             (and([q51 <= program_Function1DR14_ExplicitBounded_Length[q46] ->
+                   or([q53 = q51
+                           | q53 : int(1..fin5),
+                             q53 <= include_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Length[q44, q46]])
+                       | q51 : int(1..maxNbOperationsPerCore)])
+              /\
+              and([or([q57 <= program_Function1DR14_ExplicitBounded_Length[q46] /\ q57 = q55
+                           | q57 : int(1..maxNbOperationsPerCore)])
+                       | q55 : int(1..fin5),
+                         q55 <= include_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Length[q44, q46]]))
+                 | q46 : int(1..CORE_EnumSize)])
+        /\
+        and([and([program_Function1DR14_ExplicitBounded_Values__tag[q58, q60] =
+                  include_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values__tag[q44, q58, q60]
+                  /\
+                  ((1 = program_Function1DR14_ExplicitBounded_Values__tag[q58, q60] ->
+                    program_Function1DR14_ExplicitBounded_Values_load_register[q58, q60] =
+                    include_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values_load_register[q44, q58, q60]
+                    /\
+                    program_Function1DR14_ExplicitBounded_Values_load_variable[q58, q60] =
+                    include_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values_load_variable[q44, q58, q60])
+                   /\
+                   (2 = program_Function1DR14_ExplicitBounded_Values__tag[q58, q60] ->
+                    program_Function1DR14_ExplicitBounded_Values_store_variable[q58, q60] =
+                    include_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values_store_variable[q44, q58, q60]
+                    /\
+                    program_Function1DR14_ExplicitBounded_Values_store_value[q58, q60] =
+                    include_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values_store_value[q44, q58, q60]))
+                  /\ q60 <= program_Function1DR14_ExplicitBounded_Length[q58]
+                      | q60 : int(1..fin5),
+                        q60 <= include_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Length[q44, q58]])
+             /\
+             and([q61 <= program_Function1DR14_ExplicitBounded_Length[q58] ->
+                  include_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values__tag[q44, q58, q61] =
+                  program_Function1DR14_ExplicitBounded_Values__tag[q58, q61]
+                  /\
+                  ((1 = include_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values__tag[q44, q58, q61] ->
+                    include_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values_load_register[q44, q58, q61] =
+                    program_Function1DR14_ExplicitBounded_Values_load_register[q58, q61]
+                    /\
+                    include_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values_load_variable[q44, q58, q61] =
+                    program_Function1DR14_ExplicitBounded_Values_load_variable[q58, q61])
+                   /\
+                   (2 = include_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values__tag[q44, q58, q61] ->
+                    include_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values_store_variable[q44, q58, q61] =
+                    program_Function1DR14_ExplicitBounded_Values_store_variable[q58, q61]
+                    /\
+                    include_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values_store_value[q44, q58, q61] =
+                    program_Function1DR14_ExplicitBounded_Values_store_value[q58, q61]))
+                  /\ q61 <= include_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Length[q44, q58]
+                      | q61 : int(1..maxNbOperationsPerCore)])
+             /\
+             (and([or([q65 <= program_Function1DR14_ExplicitBounded_Length[q58] /\ q65 = q63
+                           | q65 : int(1..maxNbOperationsPerCore)])
+                       | q63 : int(1..fin5),
+                         q63 <= include_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Length[q44, q58]])
+              /\
+              and([q67 <= program_Function1DR14_ExplicitBounded_Length[q58] ->
+                   or([q69 = q67
+                           | q69 : int(1..fin5),
+                             q69 <= include_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Length[q44, q58]])
+                       | q67 : int(1..maxNbOperationsPerCore)]))
+                 | q58 : int(1..CORE_EnumSize)])
+            | q44 : int(1..fin3)]),
+    !or([and([and([q75 <= program_Function1DR14_ExplicitBounded_Length[q73] ->
+                   exclude_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values__tag[q71, q73, q75] =
+                   program_Function1DR14_ExplicitBounded_Values__tag[q73, q75]
+                   /\
+                   ((1 = exclude_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values__tag[q71, q73, q75] ->
+                     exclude_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values_load_register[q71, q73, q75] =
+                     program_Function1DR14_ExplicitBounded_Values_load_register[q73, q75]
+                     /\
+                     exclude_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values_load_variable[q71, q73, q75] =
+                     program_Function1DR14_ExplicitBounded_Values_load_variable[q73, q75])
+                    /\
+                    (2 = exclude_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values__tag[q71, q73, q75] ->
+                     exclude_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values_store_variable[q71, q73, q75] =
+                     program_Function1DR14_ExplicitBounded_Values_store_variable[q73, q75]
+                     /\
+                     exclude_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values_store_value[q71, q73, q75] =
+                     program_Function1DR14_ExplicitBounded_Values_store_value[q73, q75]))
+                   /\ q75 <= exclude_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Length[q71, q73]
+                       | q75 : int(1..maxNbOperationsPerCore)])
+              /\
+              and([program_Function1DR14_ExplicitBounded_Values__tag[q73, q76] =
+                   exclude_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values__tag[q71, q73, q76]
+                   /\
+                   ((1 = program_Function1DR14_ExplicitBounded_Values__tag[q73, q76] ->
+                     program_Function1DR14_ExplicitBounded_Values_load_register[q73, q76] =
+                     exclude_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values_load_register[q71, q73, q76]
+                     /\
+                     program_Function1DR14_ExplicitBounded_Values_load_variable[q73, q76] =
+                     exclude_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values_load_variable[q71, q73, q76])
+                    /\
+                    (2 = program_Function1DR14_ExplicitBounded_Values__tag[q73, q76] ->
+                     program_Function1DR14_ExplicitBounded_Values_store_variable[q73, q76] =
+                     exclude_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values_store_variable[q71, q73, q76]
+                     /\
+                     program_Function1DR14_ExplicitBounded_Values_store_value[q73, q76] =
+                     exclude_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values_store_value[q71, q73, q76]))
+                   /\ q76 <= program_Function1DR14_ExplicitBounded_Length[q73]
+                       | q76 : int(1..fin8),
+                         q76 <= exclude_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Length[q71, q73]])
+              /\
+              (and([q78 <= program_Function1DR14_ExplicitBounded_Length[q73] ->
+                    or([q80 = q78
+                            | q80 : int(1..fin8),
+                              q80 <= exclude_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Length[q71, q73]])
+                        | q78 : int(1..maxNbOperationsPerCore)])
+               /\
+               and([or([q84 <= program_Function1DR14_ExplicitBounded_Length[q73] /\ q84 = q82
+                            | q84 : int(1..maxNbOperationsPerCore)])
+                        | q82 : int(1..fin8),
+                          q82 <= exclude_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Length[q71, q73]]))
+                  | q73 : int(1..CORE_EnumSize)])
+         /\
+         and([and([program_Function1DR14_ExplicitBounded_Values__tag[q85, q87] =
+                   exclude_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values__tag[q71, q85, q87]
+                   /\
+                   ((1 = program_Function1DR14_ExplicitBounded_Values__tag[q85, q87] ->
+                     program_Function1DR14_ExplicitBounded_Values_load_register[q85, q87] =
+                     exclude_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values_load_register[q71, q85, q87]
+                     /\
+                     program_Function1DR14_ExplicitBounded_Values_load_variable[q85, q87] =
+                     exclude_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values_load_variable[q71, q85, q87])
+                    /\
+                    (2 = program_Function1DR14_ExplicitBounded_Values__tag[q85, q87] ->
+                     program_Function1DR14_ExplicitBounded_Values_store_variable[q85, q87] =
+                     exclude_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values_store_variable[q71, q85, q87]
+                     /\
+                     program_Function1DR14_ExplicitBounded_Values_store_value[q85, q87] =
+                     exclude_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values_store_value[q71, q85, q87]))
+                   /\ q87 <= program_Function1DR14_ExplicitBounded_Length[q85]
+                       | q87 : int(1..fin8),
+                         q87 <= exclude_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Length[q71, q85]])
+              /\
+              and([q88 <= program_Function1DR14_ExplicitBounded_Length[q85] ->
+                   exclude_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values__tag[q71, q85, q88] =
+                   program_Function1DR14_ExplicitBounded_Values__tag[q85, q88]
+                   /\
+                   ((1 = exclude_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values__tag[q71, q85, q88] ->
+                     exclude_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values_load_register[q71, q85, q88] =
+                     program_Function1DR14_ExplicitBounded_Values_load_register[q85, q88]
+                     /\
+                     exclude_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values_load_variable[q71, q85, q88] =
+                     program_Function1DR14_ExplicitBounded_Values_load_variable[q85, q88])
+                    /\
+                    (2 = exclude_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values__tag[q71, q85, q88] ->
+                     exclude_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values_store_variable[q71, q85, q88] =
+                     program_Function1DR14_ExplicitBounded_Values_store_variable[q85, q88]
+                     /\
+                     exclude_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Values_store_value[q71, q85, q88] =
+                     program_Function1DR14_ExplicitBounded_Values_store_value[q85, q88]))
+                   /\ q88 <= exclude_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Length[q71, q85]
+                       | q88 : int(1..maxNbOperationsPerCore)])
+              /\
+              (and([or([q92 <= program_Function1DR14_ExplicitBounded_Length[q85] /\ q92 = q90
+                            | q92 : int(1..maxNbOperationsPerCore)])
+                        | q90 : int(1..fin8),
+                          q90 <= exclude_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Length[q71, q85]])
+               /\
+               and([q94 <= program_Function1DR14_ExplicitBounded_Length[q85] ->
+                    or([q96 = q94
+                            | q96 : int(1..fin8),
+                              q96 <= exclude_programs_ExplicitR9R14_Function1DR14_ExplicitBounded_Length[q71, q85]])
+                        | q94 : int(1..maxNbOperationsPerCore)]))
+                  | q85 : int(1..CORE_EnumSize)])
+             | q71 : int(1..fin6)]),
+    and([q5 > step_of_variables_ExplicitBoundedR9_Length ->
+         and([step_of_variables_ExplicitBoundedR9_Values_Function1D[q5, q17] = 1 | q17 : int(1..VARIABLE_EnumSize)])
+             | q5 : int(1..maxNbOperationsInExec)]),
+    step_of_variables_ExplicitBoundedR9_Length <= maxNbOperationsInExec,
+    and([q8 > step_of_registers_ExplicitBoundedR11_Length ->
+         and([and([step_of_registers_ExplicitBoundedR11_Values_FunctionND[q8, q18, q97] = 1
+                       | q97 : int(1..REGISTER_EnumSize)])
+                  | q18 : int(1..CORE_EnumSize)])
+             | q8 : int(1..maxNbOperationsInExec)]),
+    step_of_registers_ExplicitBoundedR11_Length <= maxNbOperationsInExec,
+    and([q12 > execution_ExplicitBounded_Length ->
+         execution_ExplicitBounded_Values_1[q12] = 1 /\
+         and([execution_ExplicitBounded_Values_2__tag[q12] = 1,
+              execution_ExplicitBounded_Values_2_load_register[q12] = 1 /\
+              execution_ExplicitBounded_Values_2_load_variable[q12] = 1,
+              execution_ExplicitBounded_Values_2_store_variable[q12] = 1 /\
+              execution_ExplicitBounded_Values_2_store_value[q12] = 1;
+                  int(1..3)])
+             | q12 : int(1..maxNbOperationsInExec)]),
+    execution_ExplicitBounded_Length <= maxNbOperationsInExec,
+    and([q13 <= execution_ExplicitBounded_Length ->
+         (execution_ExplicitBounded_Values_2__tag[q13] != 1 ->
+          execution_ExplicitBounded_Values_2_load_register[q13] = 1 /\
+          execution_ExplicitBounded_Values_2_load_variable[q13] = 1)
+             | q13 : int(1..maxNbOperationsInExec)]),
+    and([q13 <= execution_ExplicitBounded_Length ->
+         (execution_ExplicitBounded_Values_2__tag[q13] != 2 ->
+          execution_ExplicitBounded_Values_2_store_variable[q13] = 1 /\
+          execution_ExplicitBounded_Values_2_store_value[q13] = 1)
+             | q13 : int(1..maxNbOperationsInExec)]),
+    and([and([q15 > program_Function1DR14_ExplicitBounded_Length[q14] ->
+              and([program_Function1DR14_ExplicitBounded_Values__tag[q14, q15] = 1,
+                   program_Function1DR14_ExplicitBounded_Values_load_register[q14, q15] = 1 /\
+                   program_Function1DR14_ExplicitBounded_Values_load_variable[q14, q15] = 1,
+                   program_Function1DR14_ExplicitBounded_Values_store_variable[q14, q15] = 1 /\
+                   program_Function1DR14_ExplicitBounded_Values_store_value[q14, q15] = 1;
+                       int(1..3)])
+                  | q15 : int(1..maxNbOperationsPerCore)])
+             | q14 : int(1..CORE_EnumSize)]),
+    and([1 <= program_Function1DR14_ExplicitBounded_Length[q14] | q14 : int(1..CORE_EnumSize)]),
+    and([program_Function1DR14_ExplicitBounded_Length[q14] <= maxNbOperationsPerCore | q14 : int(1..CORE_EnumSize)]),
+    and([and([q16 <= program_Function1DR14_ExplicitBounded_Length[q14] ->
+              (program_Function1DR14_ExplicitBounded_Values__tag[q14, q16] != 1 ->
+               program_Function1DR14_ExplicitBounded_Values_load_register[q14, q16] = 1 /\
+               program_Function1DR14_ExplicitBounded_Values_load_variable[q14, q16] = 1)
+                  | q16 : int(1..maxNbOperationsPerCore)])
+             | q14 : int(1..CORE_EnumSize)]),
+    and([and([q16 <= program_Function1DR14_ExplicitBounded_Length[q14] ->
+              (program_Function1DR14_ExplicitBounded_Values__tag[q14, q16] != 2 ->
+               program_Function1DR14_ExplicitBounded_Values_store_variable[q14, q16] = 1 /\
+               program_Function1DR14_ExplicitBounded_Values_store_value[q14, q16] = 1)
+                  | q16 : int(1..maxNbOperationsPerCore)])
+             | q14 : int(1..CORE_EnumSize)])
+
+$ Conjure's
+$ {"finds": [{"Name": "program"}, {"Name": "execution"}, {"Name": "step_of_registers"}, {"Name": "step_of_variables"}],
+$  "givens": [{"Name": "maxNbOperationsPerCore"}, {"Name": "MCM"}, {"Name": "initial_step_of_registers"},
+$             {"Name": "initial_step_of_variables"}, {"Name": "final_step_of_registers"},
+$             {"Name": "final_step_of_variables"}, {"Name": "include_programs"}, {"Name": "exclude_programs"}],
+$  "enumGivens": [{"Name": "CORE"}, {"Name": "REGISTER"}, {"Name": "VARIABLE"}, {"Name": "VALUE"}],
+$  "enumLettings": [{"LettingDomainDefnEnum": [{"Name": "IMPLEMENTED_MCMs"}, [{"Name": "SC"}, {"Name": "TSO"}]]}],
+$  "lettings": [[{"Name": "CORE"},
+$                {"Domain": {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                            {"Reference": [{"Name": "CORE_EnumSize"},
+$                                                                           {"DeclNoRepr": ["Given",
+$                                                                                           {"Name": "CORE_EnumSize"},
+$                                                                                           {"DomainInt": []},
+$                                                                                           {"NoRegion": []}]}]}]}]}}],
+$               [{"Name": "REGISTER"},
+$                {"Domain": {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                            {"Reference": [{"Name": "REGISTER_EnumSize"},
+$                                                                           {"DeclNoRepr": ["Given",
+$                                                                                           {"Name": "REGISTER_EnumSize"},
+$                                                                                           {"DomainInt": []},
+$                                                                                           {"NoRegion": []}]}]}]}]}}],
+$               [{"Name": "VARIABLE"},
+$                {"Domain": {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                            {"Reference": [{"Name": "VARIABLE_EnumSize"},
+$                                                                           {"DeclNoRepr": ["Given",
+$                                                                                           {"Name": "VARIABLE_EnumSize"},
+$                                                                                           {"DomainInt": []},
+$                                                                                           {"NoRegion": []}]}]}]}]}}],
+$               [{"Name": "VALUE"},
+$                {"Domain": {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                            {"Reference": [{"Name": "VALUE_EnumSize"},
+$                                                                           {"DeclNoRepr": ["Given",
+$                                                                                           {"Name": "VALUE_EnumSize"},
+$                                                                                           {"DomainInt": []},
+$                                                                                           {"NoRegion": []}]}]}]}]}}],
+$               [{"Name": "IMPLEMENTED_MCMs"},
+$                {"Domain": {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                            {"Constant": {"ConstantInt": 2}}]}]}}],
+$               [{"Name": "OPERATION"},
+$                {"Domain": {"DomainVariant": [[{"Name": "load"},
+$                                               {"DomainRecord": [[{"Name": "register"},
+$                                                                  {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                   {"Reference": [{"Name": "REGISTER_EnumSize"},
+$                                                                                                                  {"DeclNoRepr": ["Given",
+$                                                                                                                                  {"Name": "REGISTER_EnumSize"},
+$                                                                                                                                  {"DomainInt": []},
+$                                                                                                                                  {"NoRegion": []}]}]}]}]}],
+$                                                                 [{"Name": "variable"},
+$                                                                  {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                   {"Reference": [{"Name": "VARIABLE_EnumSize"},
+$                                                                                                                  {"DeclNoRepr": ["Given",
+$                                                                                                                                  {"Name": "VARIABLE_EnumSize"},
+$                                                                                                                                  {"DomainInt": []},
+$                                                                                                                                  {"NoRegion": []}]}]}]}]}]]}],
+$                                              [{"Name": "store"},
+$                                               {"DomainRecord": [[{"Name": "variable"},
+$                                                                  {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                   {"Reference": [{"Name": "VARIABLE_EnumSize"},
+$                                                                                                                  {"DeclNoRepr": ["Given",
+$                                                                                                                                  {"Name": "VARIABLE_EnumSize"},
+$                                                                                                                                  {"DomainInt": []},
+$                                                                                                                                  {"NoRegion": []}]}]}]}]}],
+$                                                                 [{"Name": "value"},
+$                                                                  {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                   {"Reference": [{"Name": "VALUE_EnumSize"},
+$                                                                                                                  {"DeclNoRepr": ["Given",
+$                                                                                                                                  {"Name": "VALUE_EnumSize"},
+$                                                                                                                                  {"DomainInt": []},
+$                                                                                                                                  {"NoRegion": []}]}]}]}]}]]}]]}}],
+$               [{"Name": "maxNbOperationsInExec"},
+$                {"Op": {"MkOpSum": {"AbstractLiteral": {"AbsLitMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                          {"Constant": {"ConstantInt": 2}}]}]},
+$                                                                         [{"Constant": {"ConstantInt": 1}},
+$                                                                          {"Op": {"MkOpProduct": {"AbstractLiteral": {"AbsLitMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                        {"Constant": {"ConstantInt": 2}}]}]},
+$                                                                                                                                       [{"Reference": [{"Name": "maxNbOperationsPerCore"},
+$                                                                                                                                                       {"DeclNoRepr": ["Given",
+$                                                                                                                                                                       {"Name": "maxNbOperationsPerCore"},
+$                                                                                                                                                                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]},
+$                                                                                                                                                                       {"NoRegion": []}]}]},
+$                                                                                                                                        {"Op": {"MkOpSum": {"Comprehension": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                              [{"Generator": {"GenDomainNoRepr": [{"Single": {"Name": "c"}},
+$                                                                                                                                                                                                                  {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                                                                   {"Reference": [{"Name": "CORE_EnumSize"},
+$                                                                                                                                                                                                                                                                  {"DeclNoRepr": ["Given",
+$                                                                                                                                                                                                                                                                                  {"Name": "CORE_EnumSize"},
+$                                                                                                                                                                                                                                                                                  {"DomainInt": []},
+$                                                                                                                                                                                                                                                                                  {"NoRegion": []}]}]}]}]}]}}]]}}}]]}}}}]]}}}}]],
+$  "unnameds": [],
+$  "strategyQ": {"PickFirst": []},
+$  "strategyA": {"Compact": []},
+$  "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$  "trailVerbose": [],
+$  "trailRewrites": [],
+$  "nameGenState": [["fin", 9], ["q", 108], ["shadow", 2]],
+$  "nbExtraGivens": 8,
+$  "representations": [[{"Name": "step_of_variables"},
+$                       {"DomainSequence": [{"Sequence_ExplicitBounded": []},
+$                                           [{"SizeAttr_MaxSize": {"Reference": [{"Name": "maxNbOperationsInExec"},
+$                                                                                {"Alias": {"Op": {"MkOpSum": {"AbstractLiteral": {"AbsLitMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                    {"Constant": {"ConstantInt": 2}}]}]},
+$                                                                                                                                                   [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                    {"Op": {"MkOpProduct": {"AbstractLiteral": {"AbsLitMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                                                                  {"Constant": {"ConstantInt": 2}}]}]},
+$                                                                                                                                                                                                                 [{"Reference": [{"Name": "maxNbOperationsPerCore"},
+$                                                                                                                                                                                                                                 {"DeclNoRepr": ["Given",
+$                                                                                                                                                                                                                                                 {"Name": "maxNbOperationsPerCore"},
+$                                                                                                                                                                                                                                                 {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]},
+$                                                                                                                                                                                                                                                 {"NoRegion": []}]}]},
+$                                                                                                                                                                                                                  {"Op": {"MkOpSum": {"Comprehension": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                                                                        [{"Generator": {"GenDomainNoRepr": [{"Single": {"Name": "c"}},
+$                                                                                                                                                                                                                                                                                            {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                                                                                                                                             {"Reference": [{"Name": "CORE_EnumSize"},
+$                                                                                                                                                                                                                                                                                                                                            {"DeclNoRepr": ["Given",
+$                                                                                                                                                                                                                                                                                                                                                            {"Name": "CORE_EnumSize"},
+$                                                                                                                                                                                                                                                                                                                                                            {"DomainInt": []},
+$                                                                                                                                                                                                                                                                                                                                                            {"NoRegion": []}]}]}]}]}]}}]]}}}]]}}}}]]}}}}}]}},
+$                                            "JectivityAttr_None"],
+$                                           {"DomainFunction": [{"Function_1D": []},
+$                                                               [{"SizeAttr_None": []}, "PartialityAttr_Total",
+$                                                                "JectivityAttr_None"],
+$                                                               {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                {"Reference": [{"Name": "VARIABLE_EnumSize"},
+$                                                                                                               {"DeclNoRepr": ["Given",
+$                                                                                                                               {"Name": "VARIABLE_EnumSize"},
+$                                                                                                                               {"DomainInt": []},
+$                                                                                                                               {"NoRegion": []}]}]}]}]},
+$                                                               {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                {"Reference": [{"Name": "VALUE_EnumSize"},
+$                                                                                                               {"DeclNoRepr": ["Given",
+$                                                                                                                               {"Name": "VALUE_EnumSize"},
+$                                                                                                                               {"DomainInt": []},
+$                                                                                                                               {"NoRegion": []}]}]}]}]}]}]}],
+$                      [{"Name": "step_of_registers"},
+$                       {"DomainSequence": [{"Sequence_ExplicitBounded": []},
+$                                           [{"SizeAttr_MaxSize": {"Reference": [{"Name": "maxNbOperationsInExec"},
+$                                                                                {"Alias": {"Op": {"MkOpSum": {"AbstractLiteral": {"AbsLitMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                    {"Constant": {"ConstantInt": 2}}]}]},
+$                                                                                                                                                   [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                    {"Op": {"MkOpProduct": {"AbstractLiteral": {"AbsLitMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                                                                  {"Constant": {"ConstantInt": 2}}]}]},
+$                                                                                                                                                                                                                 [{"Reference": [{"Name": "maxNbOperationsPerCore"},
+$                                                                                                                                                                                                                                 {"DeclNoRepr": ["Given",
+$                                                                                                                                                                                                                                                 {"Name": "maxNbOperationsPerCore"},
+$                                                                                                                                                                                                                                                 {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]},
+$                                                                                                                                                                                                                                                 {"NoRegion": []}]}]},
+$                                                                                                                                                                                                                  {"Op": {"MkOpSum": {"Comprehension": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                                                                        [{"Generator": {"GenDomainNoRepr": [{"Single": {"Name": "c"}},
+$                                                                                                                                                                                                                                                                                            {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                                                                                                                                             {"Reference": [{"Name": "CORE_EnumSize"},
+$                                                                                                                                                                                                                                                                                                                                            {"DeclNoRepr": ["Given",
+$                                                                                                                                                                                                                                                                                                                                                            {"Name": "CORE_EnumSize"},
+$                                                                                                                                                                                                                                                                                                                                                            {"DomainInt": []},
+$                                                                                                                                                                                                                                                                                                                                                            {"NoRegion": []}]}]}]}]}]}}]]}}}]]}}}}]]}}}}}]}},
+$                                            "JectivityAttr_None"],
+$                                           {"DomainFunction": [{"Function_ND": []},
+$                                                               [{"SizeAttr_None": []}, "PartialityAttr_Total",
+$                                                                "JectivityAttr_None"],
+$                                                               {"DomainTuple": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                 {"Reference": [{"Name": "CORE_EnumSize"},
+$                                                                                                                                {"DeclNoRepr": ["Given",
+$                                                                                                                                                {"Name": "CORE_EnumSize"},
+$                                                                                                                                                {"DomainInt": []},
+$                                                                                                                                                {"NoRegion": []}]}]}]}]},
+$                                                                                {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                 {"Reference": [{"Name": "REGISTER_EnumSize"},
+$                                                                                                                                {"DeclNoRepr": ["Given",
+$                                                                                                                                                {"Name": "REGISTER_EnumSize"},
+$                                                                                                                                                {"DomainInt": []},
+$                                                                                                                                                {"NoRegion": []}]}]}]}]}]},
+$                                                               {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                {"Reference": [{"Name": "VALUE_EnumSize"},
+$                                                                                                               {"DeclNoRepr": ["Given",
+$                                                                                                                               {"Name": "VALUE_EnumSize"},
+$                                                                                                                               {"DomainInt": []},
+$                                                                                                                               {"NoRegion": []}]}]}]}]}]}]}],
+$                      [{"Name": "CORE_EnumSize"}, {"DomainInt": []}],
+$                      [{"Name": "maxNbOperationsPerCore"},
+$                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"Name": "REGISTER_EnumSize"}, {"DomainInt": []}],
+$                      [{"Name": "VARIABLE_EnumSize"}, {"DomainInt": []}],
+$                      [{"Name": "VALUE_EnumSize"}, {"DomainInt": []}],
+$                      [{"Name": "execution"},
+$                       {"DomainSequence": [{"Sequence_ExplicitBounded": []},
+$                                           [{"SizeAttr_MaxSize": {"Reference": [{"Name": "maxNbOperationsInExec"},
+$                                                                                {"Alias": {"Op": {"MkOpSum": {"AbstractLiteral": {"AbsLitMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                    {"Constant": {"ConstantInt": 2}}]}]},
+$                                                                                                                                                   [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                    {"Op": {"MkOpProduct": {"AbstractLiteral": {"AbsLitMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                                                                  {"Constant": {"ConstantInt": 2}}]}]},
+$                                                                                                                                                                                                                 [{"Reference": [{"Name": "maxNbOperationsPerCore"},
+$                                                                                                                                                                                                                                 {"DeclHasRepr": ["Given",
+$                                                                                                                                                                                                                                                  {"Name": "maxNbOperationsPerCore"},
+$                                                                                                                                                                                                                                                  {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]},
+$                                                                                                                                                                                                                  {"Op": {"MkOpSum": {"Comprehension": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                                                                        [{"Generator": {"GenDomainHasRepr": [{"Name": "c"},
+$                                                                                                                                                                                                                                                                                             {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                                                                                                                                              {"Reference": [{"Name": "CORE_EnumSize"},
+$                                                                                                                                                                                                                                                                                                                                             {"DeclHasRepr": ["Given",
+$                                                                                                                                                                                                                                                                                                                                                              {"Name": "CORE_EnumSize"},
+$                                                                                                                                                                                                                                                                                                                                                              {"DomainInt": []}]}]}]}]}]}}]]}}}]]}}}}]]}}}}}]}},
+$                                            "JectivityAttr_None"],
+$                                           {"DomainTuple": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                             {"Reference": [{"Name": "CORE_EnumSize"},
+$                                                                                                            {"DeclHasRepr": ["Given",
+$                                                                                                                             {"Name": "CORE_EnumSize"},
+$                                                                                                                             {"DomainInt": []}]}]}]}]},
+$                                                            {"DomainVariant": [[{"Name": "load"},
+$                                                                                {"DomainRecord": [[{"Name": "register"},
+$                                                                                                   {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                    {"Reference": [{"Name": "REGISTER_EnumSize"},
+$                                                                                                                                                   {"DeclHasRepr": ["Given",
+$                                                                                                                                                                    {"Name": "REGISTER_EnumSize"},
+$                                                                                                                                                                    {"DomainInt": []}]}]}]}]}],
+$                                                                                                  [{"Name": "variable"},
+$                                                                                                   {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                    {"Reference": [{"Name": "VARIABLE_EnumSize"},
+$                                                                                                                                                   {"DeclHasRepr": ["Given",
+$                                                                                                                                                                    {"Name": "VARIABLE_EnumSize"},
+$                                                                                                                                                                    {"DomainInt": []}]}]}]}]}]]}],
+$                                                                               [{"Name": "store"},
+$                                                                                {"DomainRecord": [[{"Name": "variable"},
+$                                                                                                   {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                    {"Reference": [{"Name": "VARIABLE_EnumSize"},
+$                                                                                                                                                   {"DeclHasRepr": ["Given",
+$                                                                                                                                                                    {"Name": "VARIABLE_EnumSize"},
+$                                                                                                                                                                    {"DomainInt": []}]}]}]}]}],
+$                                                                                                  [{"Name": "value"},
+$                                                                                                   {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                    {"Reference": [{"Name": "VALUE_EnumSize"},
+$                                                                                                                                                   {"DeclHasRepr": ["Given",
+$                                                                                                                                                                    {"Name": "VALUE_EnumSize"},
+$                                                                                                                                                                    {"DomainInt": []}]}]}]}]}]]}]]}]}]}],
+$                      [{"Name": "program"},
+$                       {"DomainFunction": [{"Function_1D": []},
+$                                           [{"SizeAttr_None": []}, "PartialityAttr_Total", "JectivityAttr_None"],
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": [{"Name": "CORE_EnumSize"},
+$                                                                                           {"DeclHasRepr": ["Given",
+$                                                                                                            {"Name": "CORE_EnumSize"},
+$                                                                                                            {"DomainInt": []}]}]}]}]},
+$                                           {"DomainSequence": [{"Sequence_ExplicitBounded": []},
+$                                                               [{"SizeAttr_MinMaxSize": [{"Constant": {"ConstantInt": 1}},
+$                                                                                         {"Reference": [{"Name": "maxNbOperationsPerCore"},
+$                                                                                                        {"DeclHasRepr": ["Given",
+$                                                                                                                         {"Name": "maxNbOperationsPerCore"},
+$                                                                                                                         {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]},
+$                                                                "JectivityAttr_None"],
+$                                                               {"DomainVariant": [[{"Name": "load"},
+$                                                                                   {"DomainRecord": [[{"Name": "register"},
+$                                                                                                      {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                       {"Reference": [{"Name": "REGISTER_EnumSize"},
+$                                                                                                                                                      {"DeclHasRepr": ["Given",
+$                                                                                                                                                                       {"Name": "REGISTER_EnumSize"},
+$                                                                                                                                                                       {"DomainInt": []}]}]}]}]}],
+$                                                                                                     [{"Name": "variable"},
+$                                                                                                      {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                       {"Reference": [{"Name": "VARIABLE_EnumSize"},
+$                                                                                                                                                      {"DeclHasRepr": ["Given",
+$                                                                                                                                                                       {"Name": "VARIABLE_EnumSize"},
+$                                                                                                                                                                       {"DomainInt": []}]}]}]}]}]]}],
+$                                                                                  [{"Name": "store"},
+$                                                                                   {"DomainRecord": [[{"Name": "variable"},
+$                                                                                                      {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                       {"Reference": [{"Name": "VARIABLE_EnumSize"},
+$                                                                                                                                                      {"DeclHasRepr": ["Given",
+$                                                                                                                                                                       {"Name": "VARIABLE_EnumSize"},
+$                                                                                                                                                                       {"DomainInt": []}]}]}]}]}],
+$                                                                                                     [{"Name": "value"},
+$                                                                                                      {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                       {"Reference": [{"Name": "VALUE_EnumSize"},
+$                                                                                                                                                      {"DeclHasRepr": ["Given",
+$                                                                                                                                                                       {"Name": "VALUE_EnumSize"},
+$                                                                                                                                                                       {"DomainInt": []}]}]}]}]}]]}]]}]}]}],
+$                      [{"Name": "MCM"},
+$                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                        {"Constant": {"ConstantInt": 2}}]}]}],
+$                      [{"MachineName": ["fin", 1, []]}, {"DomainInt": []}],
+$                      [{"Name": "final_step_of_registers"},
+$                       {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 1, []]},
+$                                                                             {"DeclHasRepr": ["Given",
+$                                                                                              {"MachineName": ["fin", 1,
+$                                                                                                               []]},
+$                                                                                              {"DomainInt": []}]}]}},
+$                                            "PartialityAttr_Partial", "JectivityAttr_None"],
+$                                           {"DomainTuple": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                             {"Reference": [{"Name": "CORE_EnumSize"},
+$                                                                                                            {"DeclHasRepr": ["Given",
+$                                                                                                                             {"Name": "CORE_EnumSize"},
+$                                                                                                                             {"DomainInt": []}]}]}]}]},
+$                                                            {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                             {"Reference": [{"Name": "REGISTER_EnumSize"},
+$                                                                                                            {"DeclHasRepr": ["Given",
+$                                                                                                                             {"Name": "REGISTER_EnumSize"},
+$                                                                                                                             {"DomainInt": []}]}]}]}]}]},
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": [{"Name": "VALUE_EnumSize"},
+$                                                                                           {"DeclHasRepr": ["Given",
+$                                                                                                            {"Name": "VALUE_EnumSize"},
+$                                                                                                            {"DomainInt": []}]}]}]}]}]}],
+$                      [{"MachineName": ["fin", 2, []]}, {"DomainInt": []}],
+$                      [{"Name": "final_step_of_variables"},
+$                       {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 2, []]},
+$                                                                             {"DeclHasRepr": ["Given",
+$                                                                                              {"MachineName": ["fin", 2,
+$                                                                                                               []]},
+$                                                                                              {"DomainInt": []}]}]}},
+$                                            "PartialityAttr_Partial", "JectivityAttr_None"],
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": [{"Name": "VARIABLE_EnumSize"},
+$                                                                                           {"DeclHasRepr": ["Given",
+$                                                                                                            {"Name": "VARIABLE_EnumSize"},
+$                                                                                                            {"DomainInt": []}]}]}]}]},
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": [{"Name": "VALUE_EnumSize"},
+$                                                                                           {"DeclHasRepr": ["Given",
+$                                                                                                            {"Name": "VALUE_EnumSize"},
+$                                                                                                            {"DomainInt": []}]}]}]}]}]}],
+$                      [{"Name": "initial_step_of_registers"},
+$                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                        {"Reference": [{"Name": "VALUE_EnumSize"},
+$                                                                       {"DeclHasRepr": ["Given",
+$                                                                                        {"Name": "VALUE_EnumSize"},
+$                                                                                        {"DomainInt": []}]}]}]}]}],
+$                      [{"Name": "initial_step_of_variables"},
+$                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                        {"Reference": [{"Name": "VALUE_EnumSize"},
+$                                                                       {"DeclHasRepr": ["Given",
+$                                                                                        {"Name": "VALUE_EnumSize"},
+$                                                                                        {"DomainInt": []}]}]}]}]}],
+$                      [{"MachineName": ["fin", 3, []]}, {"DomainInt": []}],
+$                      [{"MachineName": ["fin", 4, []]}, {"DomainInt": []}],
+$                      [{"MachineName": ["fin", 5, []]}, {"DomainInt": []}],
+$                      [{"Name": "include_programs"},
+$                       {"DomainSet": [{"Set_Explicit": []},
+$                                      {"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 3, []]},
+$                                                                       {"DeclHasRepr": ["Given",
+$                                                                                        {"MachineName": ["fin", 3, []]},
+$                                                                                        {"DomainInt": []}]}]}},
+$                                      {"DomainFunction": [{"Function_1D": []},
+$                                                          [{"SizeAttr_MaxSize": {"Reference": [{"MachineName": ["fin", 4,
+$                                                                                                                []]},
+$                                                                                               {"DeclHasRepr": ["Given",
+$                                                                                                                {"MachineName": ["fin",
+$                                                                                                                                 4,
+$                                                                                                                                 []]},
+$                                                                                                                {"DomainInt": []}]}]}},
+$                                                           "PartialityAttr_Total", "JectivityAttr_None"],
+$                                                          {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                           {"Reference": [{"Name": "CORE_EnumSize"},
+$                                                                                                          {"DeclHasRepr": ["Given",
+$                                                                                                                           {"Name": "CORE_EnumSize"},
+$                                                                                                                           {"DomainInt": []}]}]}]}]},
+$                                                          {"DomainSequence": [{"Sequence_ExplicitBounded": []},
+$                                                                              [{"SizeAttr_MaxSize": {"Reference": [{"MachineName": ["fin",
+$                                                                                                                                    5,
+$                                                                                                                                    []]},
+$                                                                                                                   {"DeclHasRepr": ["Given",
+$                                                                                                                                    {"MachineName": ["fin",
+$                                                                                                                                                     5,
+$                                                                                                                                                     []]},
+$                                                                                                                                    {"DomainInt": []}]}]}},
+$                                                                               "JectivityAttr_None"],
+$                                                                              {"DomainVariant": [[{"Name": "load"},
+$                                                                                                  {"DomainRecord": [[{"Name": "register"},
+$                                                                                                                     {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                      {"Reference": [{"Name": "REGISTER_EnumSize"},
+$                                                                                                                                                                     {"DeclHasRepr": ["Given",
+$                                                                                                                                                                                      {"Name": "REGISTER_EnumSize"},
+$                                                                                                                                                                                      {"DomainInt": []}]}]}]}]}],
+$                                                                                                                    [{"Name": "variable"},
+$                                                                                                                     {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                      {"Reference": [{"Name": "VARIABLE_EnumSize"},
+$                                                                                                                                                                     {"DeclHasRepr": ["Given",
+$                                                                                                                                                                                      {"Name": "VARIABLE_EnumSize"},
+$                                                                                                                                                                                      {"DomainInt": []}]}]}]}]}]]}],
+$                                                                                                 [{"Name": "store"},
+$                                                                                                  {"DomainRecord": [[{"Name": "variable"},
+$                                                                                                                     {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                      {"Reference": [{"Name": "VARIABLE_EnumSize"},
+$                                                                                                                                                                     {"DeclHasRepr": ["Given",
+$                                                                                                                                                                                      {"Name": "VARIABLE_EnumSize"},
+$                                                                                                                                                                                      {"DomainInt": []}]}]}]}]}],
+$                                                                                                                    [{"Name": "value"},
+$                                                                                                                     {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                      {"Reference": [{"Name": "VALUE_EnumSize"},
+$                                                                                                                                                                     {"DeclHasRepr": ["Given",
+$                                                                                                                                                                                      {"Name": "VALUE_EnumSize"},
+$                                                                                                                                                                                      {"DomainInt": []}]}]}]}]}]]}]]}]}]}]}],
+$                      [{"MachineName": ["fin", 6, []]}, {"DomainInt": []}],
+$                      [{"MachineName": ["fin", 7, []]}, {"DomainInt": []}],
+$                      [{"MachineName": ["fin", 8, []]}, {"DomainInt": []}],
+$                      [{"Name": "exclude_programs"},
+$                       {"DomainSet": [{"Set_Explicit": []},
+$                                      {"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 6, []]},
+$                                                                       {"DeclHasRepr": ["Given",
+$                                                                                        {"MachineName": ["fin", 6, []]},
+$                                                                                        {"DomainInt": []}]}]}},
+$                                      {"DomainFunction": [{"Function_1D": []},
+$                                                          [{"SizeAttr_MaxSize": {"Reference": [{"MachineName": ["fin", 7,
+$                                                                                                                []]},
+$                                                                                               {"DeclHasRepr": ["Given",
+$                                                                                                                {"MachineName": ["fin",
+$                                                                                                                                 7,
+$                                                                                                                                 []]},
+$                                                                                                                {"DomainInt": []}]}]}},
+$                                                           "PartialityAttr_Total", "JectivityAttr_None"],
+$                                                          {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                           {"Reference": [{"Name": "CORE_EnumSize"},
+$                                                                                                          {"DeclHasRepr": ["Given",
+$                                                                                                                           {"Name": "CORE_EnumSize"},
+$                                                                                                                           {"DomainInt": []}]}]}]}]},
+$                                                          {"DomainSequence": [{"Sequence_ExplicitBounded": []},
+$                                                                              [{"SizeAttr_MaxSize": {"Reference": [{"MachineName": ["fin",
+$                                                                                                                                    8,
+$                                                                                                                                    []]},
+$                                                                                                                   {"DeclHasRepr": ["Given",
+$                                                                                                                                    {"MachineName": ["fin",
+$                                                                                                                                                     8,
+$                                                                                                                                                     []]},
+$                                                                                                                                    {"DomainInt": []}]}]}},
+$                                                                               "JectivityAttr_None"],
+$                                                                              {"DomainVariant": [[{"Name": "load"},
+$                                                                                                  {"DomainRecord": [[{"Name": "register"},
+$                                                                                                                     {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                      {"Reference": [{"Name": "REGISTER_EnumSize"},
+$                                                                                                                                                                     {"DeclHasRepr": ["Given",
+$                                                                                                                                                                                      {"Name": "REGISTER_EnumSize"},
+$                                                                                                                                                                                      {"DomainInt": []}]}]}]}]}],
+$                                                                                                                    [{"Name": "variable"},
+$                                                                                                                     {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                      {"Reference": [{"Name": "VARIABLE_EnumSize"},
+$                                                                                                                                                                     {"DeclHasRepr": ["Given",
+$                                                                                                                                                                                      {"Name": "VARIABLE_EnumSize"},
+$                                                                                                                                                                                      {"DomainInt": []}]}]}]}]}]]}],
+$                                                                                                 [{"Name": "store"},
+$                                                                                                  {"DomainRecord": [[{"Name": "variable"},
+$                                                                                                                     {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                      {"Reference": [{"Name": "VARIABLE_EnumSize"},
+$                                                                                                                                                                     {"DeclHasRepr": ["Given",
+$                                                                                                                                                                                      {"Name": "VARIABLE_EnumSize"},
+$                                                                                                                                                                                      {"DomainInt": []}]}]}]}]}],
+$                                                                                                                    [{"Name": "value"},
+$                                                                                                                     {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                      {"Reference": [{"Name": "VALUE_EnumSize"},
+$                                                                                                                                                                     {"DeclHasRepr": ["Given",
+$                                                                                                                                                                                      {"Name": "VALUE_EnumSize"},
+$                                                                                                                                                                                      {"DomainInt": []}]}]}]}]}]]}]]}]}]}]}]],
+$  "representationsTree": [[{"Name": "CORE_EnumSize"},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"Name": "MCM"},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"Name": "REGISTER_EnumSize"},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"Name": "VALUE_EnumSize"},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"Name": "VARIABLE_EnumSize"},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"Name": "exclude_programs"},
+$                           [{"rootLabel": {"Set_Explicit": []},
+$                             "subForest": [{"rootLabel": {"Function_1D": []},
+$                                            "subForest": [{"rootLabel": null,
+$                                                           "subForest": []},
+$                                                          {"rootLabel": {"Sequence_ExplicitBounded": []},
+$                                                           "subForest": [{"rootLabel": null,
+$                                                                          "subForest": [{"rootLabel": null,
+$                                                                                         "subForest": [{"rootLabel": null,
+$                                                                                                        "subForest": []},
+$                                                                                                       {"rootLabel": null,
+$                                                                                                        "subForest": []}]},
+$                                                                                        {"rootLabel": null,
+$                                                                                         "subForest": [{"rootLabel": null,
+$                                                                                                        "subForest": []},
+$                                                                                                       {"rootLabel": null,
+$                                                                                                        "subForest": []}]}]}]}]}]}]],
+$                          [{"Name": "execution"},
+$                           [{"rootLabel": {"Sequence_ExplicitBounded": []},
+$                             "subForest": [{"rootLabel": null,
+$                                            "subForest": [{"rootLabel": null,
+$                                                           "subForest": []},
+$                                                          {"rootLabel": null,
+$                                                           "subForest": [{"rootLabel": null,
+$                                                                          "subForest": [{"rootLabel": null,
+$                                                                                         "subForest": []},
+$                                                                                        {"rootLabel": null,
+$                                                                                         "subForest": []}]},
+$                                                                         {"rootLabel": null,
+$                                                                          "subForest": [{"rootLabel": null,
+$                                                                                         "subForest": []},
+$                                                                                        {"rootLabel": null,
+$                                                                                         "subForest": []}]}]}]}]}]],
+$                          [{"MachineName": ["fin", 1, []]},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"MachineName": ["fin", 2, []]},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"MachineName": ["fin", 3, []]},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"MachineName": ["fin", 4, []]},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"MachineName": ["fin", 5, []]},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"MachineName": ["fin", 6, []]},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"MachineName": ["fin", 7, []]},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"MachineName": ["fin", 8, []]},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"Name": "final_step_of_registers"},
+$                           [{"rootLabel": {"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                             "subForest": [{"rootLabel": null,
+$                                            "subForest": [{"rootLabel": null,
+$                                                           "subForest": []},
+$                                                          {"rootLabel": null,
+$                                                           "subForest": []}]},
+$                                           {"rootLabel": null,
+$                                            "subForest": []}]}]],
+$                          [{"Name": "final_step_of_variables"},
+$                           [{"rootLabel": {"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                             "subForest": [{"rootLabel": null,
+$                                            "subForest": []},
+$                                           {"rootLabel": null,
+$                                            "subForest": []}]}]],
+$                          [{"Name": "include_programs"},
+$                           [{"rootLabel": {"Set_Explicit": []},
+$                             "subForest": [{"rootLabel": {"Function_1D": []},
+$                                            "subForest": [{"rootLabel": null,
+$                                                           "subForest": []},
+$                                                          {"rootLabel": {"Sequence_ExplicitBounded": []},
+$                                                           "subForest": [{"rootLabel": null,
+$                                                                          "subForest": [{"rootLabel": null,
+$                                                                                         "subForest": [{"rootLabel": null,
+$                                                                                                        "subForest": []},
+$                                                                                                       {"rootLabel": null,
+$                                                                                                        "subForest": []}]},
+$                                                                                        {"rootLabel": null,
+$                                                                                         "subForest": [{"rootLabel": null,
+$                                                                                                        "subForest": []},
+$                                                                                                       {"rootLabel": null,
+$                                                                                                        "subForest": []}]}]}]}]}]}]],
+$                          [{"Name": "initial_step_of_registers"},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"Name": "initial_step_of_variables"},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"Name": "maxNbOperationsPerCore"},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"Name": "program"},
+$                           [{"rootLabel": {"Function_1D": []},
+$                             "subForest": [{"rootLabel": null,
+$                                            "subForest": []},
+$                                           {"rootLabel": {"Sequence_ExplicitBounded": []},
+$                                            "subForest": [{"rootLabel": null,
+$                                                           "subForest": [{"rootLabel": null,
+$                                                                          "subForest": [{"rootLabel": null,
+$                                                                                         "subForest": []},
+$                                                                                        {"rootLabel": null,
+$                                                                                         "subForest": []}]},
+$                                                                         {"rootLabel": null,
+$                                                                          "subForest": [{"rootLabel": null,
+$                                                                                         "subForest": []},
+$                                                                                        {"rootLabel": null,
+$                                                                                         "subForest": []}]}]}]}]}]],
+$                          [{"Name": "step_of_registers"},
+$                           [{"rootLabel": {"Sequence_ExplicitBounded": []},
+$                             "subForest": [{"rootLabel": {"Function_ND": []},
+$                                            "subForest": [{"rootLabel": null,
+$                                                           "subForest": [{"rootLabel": null,
+$                                                                          "subForest": []},
+$                                                                         {"rootLabel": null,
+$                                                                          "subForest": []}]},
+$                                                          {"rootLabel": null,
+$                                                           "subForest": []}]}]}]],
+$                          [{"Name": "step_of_variables"},
+$                           [{"rootLabel": {"Sequence_ExplicitBounded": []},
+$                             "subForest": [{"rootLabel": {"Function_1D": []},
+$                                            "subForest": [{"rootLabel": null,
+$                                                           "subForest": []},
+$                                                          {"rootLabel": null,
+$                                                           "subForest": []}]}]}]]],
+$  "originalDomains": [[{"Name": "maxNbOperationsPerCore"},
+$                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"Name": "MCM"}, {"DomainEnum": [{"Name": "IMPLEMENTED_MCMs"}, null, null]}],
+$                      [{"Name": "program"},
+$                       {"DomainFunction": [[], [{"SizeAttr_None": []}, "PartialityAttr_Total", "JectivityAttr_None"],
+$                                           {"DomainEnum": [{"Name": "CORE"}, null, null]},
+$                                           {"DomainSequence": [[],
+$                                                               [{"SizeAttr_MinMaxSize": [{"Constant": {"ConstantInt": 1}},
+$                                                                                         {"Reference": [{"Name": "maxNbOperationsPerCore"},
+$                                                                                                        null]}]},
+$                                                                "JectivityAttr_None"],
+$                                                               {"DomainVariant": [[{"Name": "load"},
+$                                                                                   {"DomainRecord": [[{"Name": "register"},
+$                                                                                                      {"DomainEnum": [{"Name": "REGISTER"},
+$                                                                                                                      null,
+$                                                                                                                      null]}],
+$                                                                                                     [{"Name": "variable"},
+$                                                                                                      {"DomainEnum": [{"Name": "VARIABLE"},
+$                                                                                                                      null,
+$                                                                                                                      null]}]]}],
+$                                                                                  [{"Name": "store"},
+$                                                                                   {"DomainRecord": [[{"Name": "variable"},
+$                                                                                                      {"DomainEnum": [{"Name": "VARIABLE"},
+$                                                                                                                      null,
+$                                                                                                                      null]}],
+$                                                                                                     [{"Name": "value"},
+$                                                                                                      {"DomainEnum": [{"Name": "VALUE"},
+$                                                                                                                      null,
+$                                                                                                                      null]}]]}]]}]}]}],
+$                      [{"Name": "execution"},
+$                       {"DomainSequence": [[],
+$                                           [{"SizeAttr_MaxSize": {"Reference": [{"Name": "maxNbOperationsInExec"},
+$                                                                                null]}},
+$                                            "JectivityAttr_None"],
+$                                           {"DomainTuple": [{"DomainEnum": [{"Name": "CORE"}, null, null]},
+$                                                            {"DomainVariant": [[{"Name": "load"},
+$                                                                                {"DomainRecord": [[{"Name": "register"},
+$                                                                                                   {"DomainEnum": [{"Name": "REGISTER"},
+$                                                                                                                   null,
+$                                                                                                                   null]}],
+$                                                                                                  [{"Name": "variable"},
+$                                                                                                   {"DomainEnum": [{"Name": "VARIABLE"},
+$                                                                                                                   null,
+$                                                                                                                   null]}]]}],
+$                                                                               [{"Name": "store"},
+$                                                                                {"DomainRecord": [[{"Name": "variable"},
+$                                                                                                   {"DomainEnum": [{"Name": "VARIABLE"},
+$                                                                                                                   null,
+$                                                                                                                   null]}],
+$                                                                                                  [{"Name": "value"},
+$                                                                                                   {"DomainEnum": [{"Name": "VALUE"},
+$                                                                                                                   null,
+$                                                                                                                   null]}]]}]]}]}]}],
+$                      [{"Name": "step_of_registers"},
+$                       {"DomainSequence": [[],
+$                                           [{"SizeAttr_MaxSize": {"Reference": [{"Name": "maxNbOperationsInExec"},
+$                                                                                null]}},
+$                                            "JectivityAttr_None"],
+$                                           {"DomainFunction": [[],
+$                                                               [{"SizeAttr_None": []}, "PartialityAttr_Total",
+$                                                                "JectivityAttr_None"],
+$                                                               {"DomainTuple": [{"DomainEnum": [{"Name": "CORE"}, null,
+$                                                                                                null]},
+$                                                                                {"DomainEnum": [{"Name": "REGISTER"},
+$                                                                                                null, null]}]},
+$                                                               {"DomainEnum": [{"Name": "VALUE"}, null, null]}]}]}],
+$                      [{"Name": "step_of_variables"},
+$                       {"DomainSequence": [[],
+$                                           [{"SizeAttr_MaxSize": {"Reference": [{"Name": "maxNbOperationsInExec"},
+$                                                                                null]}},
+$                                            "JectivityAttr_None"],
+$                                           {"DomainFunction": [[],
+$                                                               [{"SizeAttr_None": []}, "PartialityAttr_Total",
+$                                                                "JectivityAttr_None"],
+$                                                               {"DomainEnum": [{"Name": "VARIABLE"}, null, null]},
+$                                                               {"DomainEnum": [{"Name": "VALUE"}, null, null]}]}]}],
+$                      [{"Name": "initial_step_of_registers"}, {"DomainEnum": [{"Name": "VALUE"}, null, null]}],
+$                      [{"Name": "initial_step_of_variables"}, {"DomainEnum": [{"Name": "VALUE"}, null, null]}],
+$                      [{"Name": "final_step_of_registers"},
+$                       {"DomainFunction": [[], [{"SizeAttr_None": []}, "PartialityAttr_Partial", "JectivityAttr_None"],
+$                                           {"DomainTuple": [{"DomainEnum": [{"Name": "CORE"}, null, null]},
+$                                                            {"DomainEnum": [{"Name": "REGISTER"}, null, null]}]},
+$                                           {"DomainEnum": [{"Name": "VALUE"}, null, null]}]}],
+$                      [{"Name": "final_step_of_variables"},
+$                       {"DomainFunction": [[], [{"SizeAttr_None": []}, "PartialityAttr_Partial", "JectivityAttr_None"],
+$                                           {"DomainEnum": [{"Name": "VARIABLE"}, null, null]},
+$                                           {"DomainEnum": [{"Name": "VALUE"}, null, null]}]}],
+$                      [{"Name": "include_programs"},
+$                       {"DomainSet": [[], {"SizeAttr_None": []},
+$                                      {"DomainFunction": [[],
+$                                                          [{"SizeAttr_None": []}, "PartialityAttr_Total",
+$                                                           "JectivityAttr_None"],
+$                                                          {"DomainEnum": [{"Name": "CORE"}, null, null]},
+$                                                          {"DomainSequence": [[],
+$                                                                              [{"SizeAttr_None": []},
+$                                                                               "JectivityAttr_None"],
+$                                                                              {"DomainVariant": [[{"Name": "load"},
+$                                                                                                  {"DomainRecord": [[{"Name": "register"},
+$                                                                                                                     {"DomainEnum": [{"Name": "REGISTER"},
+$                                                                                                                                     null,
+$                                                                                                                                     null]}],
+$                                                                                                                    [{"Name": "variable"},
+$                                                                                                                     {"DomainEnum": [{"Name": "VARIABLE"},
+$                                                                                                                                     null,
+$                                                                                                                                     null]}]]}],
+$                                                                                                 [{"Name": "store"},
+$                                                                                                  {"DomainRecord": [[{"Name": "variable"},
+$                                                                                                                     {"DomainEnum": [{"Name": "VARIABLE"},
+$                                                                                                                                     null,
+$                                                                                                                                     null]}],
+$                                                                                                                    [{"Name": "value"},
+$                                                                                                                     {"DomainEnum": [{"Name": "VALUE"},
+$                                                                                                                                     null,
+$                                                                                                                                     null]}]]}]]}]}]}]}],
+$                      [{"Name": "exclude_programs"},
+$                       {"DomainSet": [[], {"SizeAttr_None": []},
+$                                      {"DomainFunction": [[],
+$                                                          [{"SizeAttr_None": []}, "PartialityAttr_Total",
+$                                                           "JectivityAttr_None"],
+$                                                          {"DomainEnum": [{"Name": "CORE"}, null, null]},
+$                                                          {"DomainSequence": [[],
+$                                                                              [{"SizeAttr_None": []},
+$                                                                               "JectivityAttr_None"],
+$                                                                              {"DomainVariant": [[{"Name": "load"},
+$                                                                                                  {"DomainRecord": [[{"Name": "register"},
+$                                                                                                                     {"DomainEnum": [{"Name": "REGISTER"},
+$                                                                                                                                     null,
+$                                                                                                                                     null]}],
+$                                                                                                                    [{"Name": "variable"},
+$                                                                                                                     {"DomainEnum": [{"Name": "VARIABLE"},
+$                                                                                                                                     null,
+$                                                                                                                                     null]}]]}],
+$                                                                                                 [{"Name": "store"},
+$                                                                                                  {"DomainRecord": [[{"Name": "variable"},
+$                                                                                                                     {"DomainEnum": [{"Name": "VARIABLE"},
+$                                                                                                                                     null,
+$                                                                                                                                     null]}],
+$                                                                                                                    [{"Name": "value"},
+$                                                                                                                     {"DomainEnum": [{"Name": "VALUE"},
+$                                                                                                                                     null,
+$                                                                                                                                     null]}]]}]]}]}]}]}]],
+$  "questionAnswered": []}

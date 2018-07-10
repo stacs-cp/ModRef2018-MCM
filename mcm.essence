@@ -1,0 +1,155 @@
+
+
+given CORE new type enum
+given REGISTER new type enum
+given VARIABLE new type enum
+given VALUE new type enum
+given maxNbOperationsPerCore : int(1..)
+
+letting IMPLEMENTED_MCMs be new type enum {SC, TSO}
+given MCM : IMPLEMENTED_MCMs
+
+letting OPERATION be domain
+    variant
+        $ load the value stored in the variable into the register
+        { load  : record { register : REGISTER, variable : VARIABLE }
+
+        $ store the value into the variable
+        , store : record { variable : VARIABLE, value : VALUE }
+        }
+
+find program :
+    function (total) CORE -->
+        sequence (minSize 1, maxSize maxNbOperationsPerCore) of OPERATION
+
+letting maxNbOperationsInExec be 1 + maxNbOperationsPerCore * sum([1 | c : CORE])
+
+find execution :
+    sequence (maxSize maxNbOperationsInExec) of (CORE, OPERATION)
+
+$ every operation in "program" has to exist once in "execution"
+such that
+    forAll (core, operations) in program .
+        forAll (index, operation) in operations .
+            1 = (sum (indexE, (coreE, operationE)) in execution .
+                    toInt(core = coreE /\ operation = operationE))
+
+$ the length of "execution" in terms of the length of "program"
+such that
+    |execution| = sum([ |ops| | (c,ops) <- program ])
+
+
+$ SC: Sequential Consistency
+$ Every pair of operation from the "program" will have the same order in "execution"
+such that MCM = SC ->
+    forAll (core, operations) in program .
+        forAll index1, index2 in defined(operations) .
+            index1 < index2 ->
+                exists indexE1, indexE2 in defined(execution) .
+                    indexE1 < indexE2 /\
+                    execution(indexE1) = (core, operations(index1)) /\
+                    execution(indexE2) = (core, operations(index2))
+
+$ TSO: Total Store Order
+such that MCM = TSO ->
+    forAll (core, operations) in program .
+        forAll index1, index2 in defined(operations) .
+            index1 < index2 /\
+            $ if the first is a store, and the second is a load, do not post any constraints
+            !(active(operations(index1), store) /\ active(operations(index2), load)) ->
+                exists indexE1, indexE2 in defined(execution) .
+                    indexE1 < indexE2 /\
+                    execution(indexE1) = (core, operations(index1)) /\
+                    execution(indexE2) = (core, operations(index2))
+
+
+
+find step_of_registers :
+    sequence (maxSize maxNbOperationsInExec) of
+        function (total) (CORE, REGISTER) --> VALUE
+
+find step_of_variables :
+    sequence (maxSize maxNbOperationsInExec) of
+        function (total) VARIABLE --> VALUE
+
+$ a way to post constraints on the initial and the final values that are stored in each register and variable
+$ doesn't have to mention all registers.
+given initial_step_of_registers, initial_step_of_variables : VALUE
+given final_step_of_registers : function (CORE, REGISTER) --> VALUE
+such that
+    forAll ((c,r),v) in final_step_of_registers . step_of_registers(|step_of_registers|)((c,r)) = v
+given final_step_of_variables : function VARIABLE --> VALUE
+such that
+    forAll (var, val) in final_step_of_variables . step_of_variables(|step_of_variables|)(var) = val
+
+$ defining the step_of_registers and step_of_variables in terms of the execution
+$ define step(1) as the initial step
+such that
+    $ initialy, all registers are empty
+    forAll r : REGISTER . forAll c : CORE .
+        step_of_registers(1)((c,r)) = initial_step_of_registers,
+
+    $ initially, all variables are 0
+    forAll v : VARIABLE .
+        step_of_variables(1)(v) = initial_step_of_variables,
+
+    $ variables cannot be asigned to initial_step_of_registers
+    forAll (index, mapping) in step_of_variables .
+        forAll (var, val) in mapping . val != initial_step_of_registers,
+
+    $ registers cannot be assigned to "initial_step_of_registers" after step 1
+    forAll (index, mapping) in step_of_registers .
+        index != 1 ->
+        forAll ((core, reg), val) in mapping .
+            $ if it takes the INITIAL value now, it must have been INITIAL always
+            initial_step_of_registers = val ->
+            initial_step_of_registers = step_of_registers(index-1)((core, reg))
+
+
+$ defining the step_of_registers and step_of_variables in terms of the execution
+$ define step(index+1) in terms of step(index) and execution(index)
+such that
+    forAll (index, (core, operation)) in execution .
+        and([
+            active(operation, load) ->
+                and([ step_of_registers(index+1)((core, operation[load][register])) =
+                      step_of_variables(index)(operation[load][variable])
+                    $ all other registers on this core stay the same
+                    , forAll r : REGISTER .
+                        r != operation[load][register] ->
+                        step_of_registers(index+1)((core, r)) = step_of_registers(index)((core, r))
+                    $ all variables stay the same
+                    , forAll v : VARIABLE .
+                        step_of_variables(index+1)(v) = step_of_variables(index)(v)
+                    ])
+            , active(operation, store) ->
+                and([ step_of_variables(index+1)(operation[store][variable]) =
+                      operation[store][value]
+                    $ all registers on this core stay the same
+                    , forAll r : REGISTER .
+                        step_of_registers(index+1)((core, r)) = step_of_registers(index)((core, r))
+                    $ all other variables stay the same
+                    , forAll v : VARIABLE .
+                        v != operation[store][variable] ->
+                        step_of_variables(index+1)(v) = step_of_variables(index)(v)
+                    ])
+            $ all registers on other cores stay the same
+            , forAll c : CORE . c != core ->
+                forAll r : REGISTER .
+                    step_of_registers(index+1)((c, r)) = step_of_registers(index)((c, r))
+            ])
+
+
+such that
+    |execution| + 1 = |step_of_variables|,
+    |execution| + 1 = |step_of_registers|
+
+given include_programs : set of function (total) CORE --> sequence of OPERATION
+such that |include_programs| > 0 -> program in include_programs
+
+given exclude_programs : set of function (total) CORE --> sequence of OPERATION
+such that !(program in exclude_programs)
+
+
+branching on [program]
+

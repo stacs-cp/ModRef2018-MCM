@@ -1,0 +1,18 @@
+X86 WRW+WR001
+"Rfe PodRW Wse PodWW Rfi PodRR Fre"
+Cycle=Rfi PodRR Fre Rfe PodRW Wse PodWW
+Relax=[Rfi,PodRR]
+Safe=Rfe Fre Wse PodWW PodRW
+Generator=diy7 (version 7.49)
+Prefetch=1:x=F,1:y=W,2:y=F,2:x=T
+Com=Rf Ws Fr
+Orig=Rfe PodRW Wse PodWW Rfi PodRR Fre
+{
+}
+ P0         | P1          | P2          ;
+ MOV [x],$1 | MOV EAX,[x] | MOV [y],$2  ;
+            | MOV [y],$1  | MOV [z],$1  ;
+            |             | MOV EAX,[z] ;
+            |             | MOV EBX,[x] ;
+exists
+(y=2 /\ 1:EAX=1 /\ 2:EAX=1 /\ 2:EBX=0)

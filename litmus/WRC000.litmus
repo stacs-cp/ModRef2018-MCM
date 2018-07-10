@@ -1,0 +1,16 @@
+X86 WRC000
+"Rfe Fri Rfe PosRR Fre"
+Cycle=Rfe Fri Rfe PosRR Fre
+Relax=Rfe
+Safe=Fri Fre PosRR
+Generator=diy7 (version 7.49)
+Prefetch=
+Com=Rf Rf Fr
+Orig=Rfe Fri Rfe PosRR Fre
+{
+}
+ P0         | P1          | P2          ;
+ MOV [x],$1 | MOV EAX,[x] | MOV EAX,[x] ;
+            | MOV [x],$2  | MOV EBX,[x] ;
+exists
+(x=2 /\ 1:EAX=1 /\ 2:EAX=2 /\ 2:EBX=2)

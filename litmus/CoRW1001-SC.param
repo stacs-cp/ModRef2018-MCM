@@ -1,0 +1,30 @@
+
+letting CORE be new type enum {c1}
+letting REGISTER be new type enum {r1, r2}
+letting VARIABLE be new type enum {x}
+letting VALUE be new type enum {Initial, v0, v1, v2}
+
+letting maxNbOperationsPerCore be 4
+
+letting initial_step_of_registers be Initial
+letting initial_step_of_variables be v0
+letting final_step_of_variables be function
+    ( x --> v2 )
+letting final_step_of_registers be function
+    ( (c1,r1) --> v0
+    , (c1,r2) --> v1
+    )
+
+
+
+letting MCM be SC
+
+letting include_programs be {
+    function(c1 --> sequence( variant {load = record {register = r1, variable = x}}
+                            , variant {store = record {variable = x, value = v1}}
+                            , variant {load = record {register = r2, variable = x}}
+                            , variant {store = record {variable = x, value = v2}}
+                            ))
+}
+
+letting exclude_programs be {}

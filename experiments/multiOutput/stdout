@@ -1,0 +1,272 @@
+ ==> Finding all outputs that can be achieved for each litmus test -- lingeling -- SC
+Using cached models.
+Savile Row: model000001.eprime ../../litmus/3.SB000-SC.param
+Savile Row: model000001.eprime ../../litmus/3.SB003-SC.param
+Savile Row: model000001.eprime ../../litmus/CoRR000-SC.param
+Savile Row: model000001.eprime ../../litmus/CoRR001-SC.param
+Savile Row: model000001.eprime ../../litmus/CoRR002-SC.param
+Savile Row: model000001.eprime ../../litmus/CoRW1000-SC.param
+Savile Row: model000001.eprime ../../litmus/CoRW1001-SC.param
+Savile Row: model000001.eprime ../../litmus/CoRW1002-SC.param
+Savile Row: model000001.eprime ../../litmus/CoRW1003-SC.param
+Savile Row: model000001.eprime ../../litmus/CoRW1005-SC.param
+Savile Row: model000001.eprime ../../litmus/CoRW1006-SC.param
+Savile Row: model000001.eprime ../../litmus/CoRW2000-SC.param
+Savile Row: model000001.eprime ../../litmus/CoRW2001-SC.param
+Savile Row: model000001.eprime ../../litmus/CoWR0000-SC.param
+Savile Row: model000001.eprime ../../litmus/CoWR0001-SC.param
+Savile Row: model000001.eprime ../../litmus/CoWR0003-SC.param
+Savile Row: model000001.eprime ../../litmus/CoWR0004-SC.param
+Savile Row: model000001.eprime ../../litmus/CoWR0005-SC.param
+Savile Row: model000001.eprime ../../litmus/CoWW000-SC.param
+Savile Row: model000001.eprime ../../litmus/CoWW001-SC.param
+Savile Row: model000001.eprime ../../litmus/IRIW000-SC.param
+Savile Row: model000001.eprime ../../litmus/LB000-SC.param
+Savile Row: model000001.eprime ../../litmus/LB001-SC.param
+Savile Row: model000001.eprime ../../litmus/LB003-SC.param
+Savile Row: model000001.eprime ../../litmus/MP000-SC.param
+Savile Row: model000001.eprime ../../litmus/MP001-SC.param
+Savile Row: model000001.eprime ../../litmus/R000-SC.param
+Savile Row: model000001.eprime ../../litmus/R001-SC.param
+Savile Row: model000001.eprime ../../litmus/R002-SC.param
+Savile Row: model000001.eprime ../../litmus/R003-SC.param
+Savile Row: model000001.eprime ../../litmus/R004-SC.param
+Savile Row: model000001.eprime ../../litmus/R005-SC.param
+Savile Row: model000001.eprime ../../litmus/RWC000-SC.param
+Savile Row: model000001.eprime ../../litmus/RWC000a-SC.param
+Savile Row: model000001.eprime ../../litmus/RWC001-SC.param
+Savile Row: model000001.eprime ../../litmus/RWC002-SC.param
+Savile Row: model000001.eprime ../../litmus/RWC003-SC.param
+Savile Row: model000001.eprime ../../litmus/RWC004-SC.param
+Savile Row: model000001.eprime ../../litmus/SB000-SC.param
+Savile Row: model000001.eprime ../../litmus/SB000a-SC.param
+Savile Row: model000001.eprime ../../litmus/SB001-SC.param
+Savile Row: model000001.eprime ../../litmus/SB001a-SC.param
+Savile Row: model000001.eprime ../../litmus/SB003-SC.param
+Savile Row: model000001.eprime ../../litmus/SB005-SC.param
+Savile Row: model000001.eprime ../../litmus/SB006-SC.param
+Savile Row: model000001.eprime ../../litmus/SB007-SC.param
+Savile Row: model000001.eprime ../../litmus/SB008-SC.param
+Savile Row: model000001.eprime ../../litmus/SB009-SC.param
+Savile Row: model000001.eprime ../../litmus/SB010-SC.param
+Savile Row: model000001.eprime ../../litmus/SB013-SC.param
+Savile Row: model000001.eprime ../../litmus/W+RWC000-SC.param
+Savile Row: model000001.eprime ../../litmus/W+RWC001-SC.param
+Savile Row: model000001.eprime ../../litmus/WRC000-SC.param
+Savile Row: model000001.eprime ../../litmus/WRC001-SC.param
+Savile Row: model000001.eprime ../../litmus/WRW+WR000-SC.param
+Savile Row: model000001.eprime ../../litmus/WRW+WR001-SC.param
+Savile Row: model000001.eprime ../../litmus/WRW+WR002-SC.param
+Savile Row: model000001.eprime ../../litmus/WRW+WR003-SC.param
+Savile Row: model000001.eprime ../../litmus/WRW+WR004-SC.param
+Savile Row: model000001.eprime ../../litmus/Z6.0000-SC.param
+Savile Row: model000001.eprime ../../litmus/Z6.0001-SC.param
+Savile Row: model000001.eprime ../../litmus/Z6.4000-SC.param
+Savile Row: model000001.eprime ../../litmus/Z6.4003-SC.param
+Savile Row: model000001.eprime ../../litmus/Z6.5000-SC.param
+Savile Row: model000001.eprime ../../litmus/Z6.5001-SC.param
+
+real	4m10.997s
+user	8m39.896s
+sys	0m20.427s
+ ==> Finding all outputs that can be achieved for each litmus test -- lingeling -- TSO
+Using cached models.
+Savile Row: model000001.eprime ../../litmus/3.SB000-TSO.param
+Savile Row: model000001.eprime ../../litmus/3.SB003-TSO.param
+Savile Row: model000001.eprime ../../litmus/CoRR000-TSO.param
+Savile Row: model000001.eprime ../../litmus/CoRR001-TSO.param
+Savile Row: model000001.eprime ../../litmus/CoRR002-TSO.param
+Savile Row: model000001.eprime ../../litmus/CoRW1000-TSO.param
+Savile Row: model000001.eprime ../../litmus/CoRW1001-TSO.param
+Savile Row: model000001.eprime ../../litmus/CoRW1002-TSO.param
+Savile Row: model000001.eprime ../../litmus/CoRW1003-TSO.param
+Savile Row: model000001.eprime ../../litmus/CoRW1005-TSO.param
+Savile Row: model000001.eprime ../../litmus/CoRW1006-TSO.param
+Savile Row: model000001.eprime ../../litmus/CoRW2000-TSO.param
+Savile Row: model000001.eprime ../../litmus/CoRW2001-TSO.param
+Savile Row: model000001.eprime ../../litmus/CoWR0000-TSO.param
+Savile Row: model000001.eprime ../../litmus/CoWR0001-TSO.param
+Savile Row: model000001.eprime ../../litmus/CoWR0003-TSO.param
+Savile Row: model000001.eprime ../../litmus/CoWR0004-TSO.param
+Savile Row: model000001.eprime ../../litmus/CoWR0005-TSO.param
+Savile Row: model000001.eprime ../../litmus/CoWW000-TSO.param
+Savile Row: model000001.eprime ../../litmus/CoWW001-TSO.param
+Savile Row: model000001.eprime ../../litmus/IRIW000-TSO.param
+Savile Row: model000001.eprime ../../litmus/LB000-TSO.param
+Savile Row: model000001.eprime ../../litmus/LB001-TSO.param
+Savile Row: model000001.eprime ../../litmus/LB003-TSO.param
+Savile Row: model000001.eprime ../../litmus/MP000-TSO.param
+Savile Row: model000001.eprime ../../litmus/MP001-TSO.param
+Savile Row: model000001.eprime ../../litmus/R000-TSO.param
+Savile Row: model000001.eprime ../../litmus/R001-TSO.param
+Savile Row: model000001.eprime ../../litmus/R002-TSO.param
+Savile Row: model000001.eprime ../../litmus/R003-TSO.param
+Savile Row: model000001.eprime ../../litmus/R004-TSO.param
+Savile Row: model000001.eprime ../../litmus/R005-TSO.param
+Savile Row: model000001.eprime ../../litmus/RWC000-TSO.param
+Savile Row: model000001.eprime ../../litmus/RWC000a-TSO.param
+Savile Row: model000001.eprime ../../litmus/RWC001-TSO.param
+Savile Row: model000001.eprime ../../litmus/RWC002-TSO.param
+Savile Row: model000001.eprime ../../litmus/RWC003-TSO.param
+Savile Row: model000001.eprime ../../litmus/RWC004-TSO.param
+Savile Row: model000001.eprime ../../litmus/SB000-TSO.param
+Savile Row: model000001.eprime ../../litmus/SB000a-TSO.param
+Savile Row: model000001.eprime ../../litmus/SB001-TSO.param
+Savile Row: model000001.eprime ../../litmus/SB001a-TSO.param
+Savile Row: model000001.eprime ../../litmus/SB003-TSO.param
+Savile Row: model000001.eprime ../../litmus/SB005-TSO.param
+Savile Row: model000001.eprime ../../litmus/SB006-TSO.param
+Savile Row: model000001.eprime ../../litmus/SB007-TSO.param
+Savile Row: model000001.eprime ../../litmus/SB008-TSO.param
+Savile Row: model000001.eprime ../../litmus/SB009-TSO.param
+Savile Row: model000001.eprime ../../litmus/SB010-TSO.param
+Savile Row: model000001.eprime ../../litmus/SB013-TSO.param
+Savile Row: model000001.eprime ../../litmus/W+RWC000-TSO.param
+Savile Row: model000001.eprime ../../litmus/W+RWC001-TSO.param
+Savile Row: model000001.eprime ../../litmus/WRC000-TSO.param
+Savile Row: model000001.eprime ../../litmus/WRC001-TSO.param
+Savile Row: model000001.eprime ../../litmus/WRW+WR000-TSO.param
+Savile Row: model000001.eprime ../../litmus/WRW+WR001-TSO.param
+Savile Row: model000001.eprime ../../litmus/WRW+WR002-TSO.param
+Savile Row: model000001.eprime ../../litmus/WRW+WR003-TSO.param
+Savile Row: model000001.eprime ../../litmus/WRW+WR004-TSO.param
+Savile Row: model000001.eprime ../../litmus/Z6.0000-TSO.param
+Savile Row: model000001.eprime ../../litmus/Z6.0001-TSO.param
+Savile Row: model000001.eprime ../../litmus/Z6.4000-TSO.param
+Savile Row: model000001.eprime ../../litmus/Z6.4003-TSO.param
+Savile Row: model000001.eprime ../../litmus/Z6.5000-TSO.param
+Savile Row: model000001.eprime ../../litmus/Z6.5001-TSO.param
+
+real	5m28.705s
+user	10m13.932s
+sys	0m24.193s
+3.SB000-SC.param	conjure-output/model000001-3.SB000-SC-solution000007.solution
+3.SB000-TSO.param	conjure-output/model000001-3.SB000-TSO-solution000063.solution
+3.SB003-SC.param	conjure-output/model000001-3.SB003-SC-solution000007.solution
+3.SB003-TSO.param	conjure-output/model000001-3.SB003-TSO-solution000008.solution
+CoRR000-SC.param	conjure-output/model000001-CoRR000-SC-solution000004.solution
+CoRR000-TSO.param	conjure-output/model000001-CoRR000-TSO-solution000008.solution
+CoRR001-SC.param	conjure-output/model000001-CoRR001-SC-solution000005.solution
+CoRR001-TSO.param	conjure-output/model000001-CoRR001-TSO-solution000010.solution
+CoRR002-SC.param	conjure-output/model000001-CoRR002-SC-solution000003.solution
+CoRR002-TSO.param	conjure-output/model000001-CoRR002-TSO-solution000003.solution
+CoRW1000-SC.param	conjure-output/model000001-CoRW1000-SC-solution000001.solution
+CoRW1000-TSO.param	conjure-output/model000001-CoRW1000-TSO-solution000001.solution
+CoRW1001-SC.param	conjure-output/model000001-CoRW1001-SC-solution000001.solution
+CoRW1001-TSO.param	conjure-output/model000001-CoRW1001-TSO-solution000002.solution
+CoRW1002-SC.param	conjure-output/model000001-CoRW1002-SC-solution000001.solution
+CoRW1002-TSO.param	conjure-output/model000001-CoRW1002-TSO-solution000001.solution
+CoRW1003-SC.param	conjure-output/model000001-CoRW1003-SC-solution000001.solution
+CoRW1003-TSO.param	conjure-output/model000001-CoRW1003-TSO-solution000001.solution
+CoRW1005-SC.param	conjure-output/model000001-CoRW1005-SC-solution000001.solution
+CoRW1005-TSO.param	conjure-output/model000001-CoRW1005-TSO-solution000001.solution
+CoRW1006-SC.param	conjure-output/model000001-CoRW1006-SC-solution000001.solution
+CoRW1006-TSO.param	conjure-output/model000001-CoRW1006-TSO-solution000001.solution
+CoRW2000-SC.param	conjure-output/model000001-CoRW2000-SC-solution000003.solution
+CoRW2000-TSO.param	conjure-output/model000001-CoRW2000-TSO-solution000003.solution
+CoRW2001-SC.param	conjure-output/model000001-CoRW2001-SC-solution000004.solution
+CoRW2001-TSO.param	conjure-output/model000001-CoRW2001-TSO-solution000004.solution
+CoWR0000-SC.param	conjure-output/model000001-CoWR0000-SC-solution000001.solution
+CoWR0000-TSO.param	conjure-output/model000001-CoWR0000-TSO-solution000005.solution
+CoWR0001-SC.param	conjure-output/model000001-CoWR0001-SC-solution000001.solution
+CoWR0001-TSO.param	conjure-output/model000001-CoWR0001-TSO-solution000002.solution
+CoWR0003-SC.param	conjure-output/model000001-CoWR0003-SC-solution000001.solution
+CoWR0003-TSO.param	conjure-output/model000001-CoWR0003-TSO-solution000003.solution
+CoWR0004-SC.param	conjure-output/model000001-CoWR0004-SC-solution000001.solution
+CoWR0004-TSO.param	conjure-output/model000001-CoWR0004-TSO-solution000003.solution
+CoWR0005-SC.param	conjure-output/model000001-CoWR0005-SC-solution000001.solution
+CoWR0005-TSO.param	conjure-output/model000001-CoWR0005-TSO-solution000006.solution
+CoWW000-SC.param	conjure-output/model000001-CoWW000-SC-solution000001.solution
+CoWW000-TSO.param	conjure-output/model000001-CoWW000-TSO-solution000003.solution
+CoWW001-SC.param	conjure-output/model000001-CoWW001-SC-solution000001.solution
+CoWW001-TSO.param	conjure-output/model000001-CoWW001-TSO-solution000002.solution
+IRIW000-SC.param	conjure-output/model000001-IRIW000-SC-solution000072.solution
+IRIW000-TSO.param	conjure-output/model000001-IRIW000-TSO-solution000072.solution
+LB000-SC.param	conjure-output/model000001-LB000-SC-solution000004.solution
+LB000-TSO.param	conjure-output/model000001-LB000-TSO-solution000004.solution
+LB001-SC.param	conjure-output/model000001-LB001-SC-solution000005.solution
+LB001-TSO.param	conjure-output/model000001-LB001-TSO-solution000005.solution
+LB003-SC.param	conjure-output/model000001-LB003-SC-solution000006.solution
+LB003-TSO.param	conjure-output/model000001-LB003-TSO-solution000006.solution
+MP000-SC.param	conjure-output/model000001-MP000-SC-solution000006.solution
+MP000-TSO.param	conjure-output/model000001-MP000-TSO-solution000012.solution
+MP001-SC.param	conjure-output/model000001-MP001-SC-solution000006.solution
+MP001-TSO.param	conjure-output/model000001-MP001-TSO-solution000006.solution
+R000-SC.param	conjure-output/model000001-R000-SC-solution000004.solution
+R000-TSO.param	conjure-output/model000001-R000-TSO-solution000009.solution
+R001-SC.param	conjure-output/model000001-R001-SC-solution000003.solution
+R001-TSO.param	conjure-output/model000001-R001-TSO-solution000007.solution
+R002-SC.param	conjure-output/model000001-R002-SC-solution000003.solution
+R002-TSO.param	conjure-output/model000001-R002-TSO-solution000004.solution
+R003-SC.param	conjure-output/model000001-R003-SC-solution000003.solution
+R003-TSO.param	conjure-output/model000001-R003-TSO-solution000004.solution
+R004-SC.param	conjure-output/model000001-R004-SC-solution000003.solution
+R004-TSO.param	conjure-output/model000001-R004-TSO-solution000004.solution
+R005-SC.param	conjure-output/model000001-R005-SC-solution000003.solution
+R005-TSO.param	conjure-output/model000001-R005-TSO-solution000004.solution
+RWC000-SC.param	conjure-output/model000001-RWC000-SC-solution000007.solution
+RWC000-TSO.param	conjure-output/model000001-RWC000-TSO-solution000015.solution
+RWC000a-SC.param	conjure-output/model000001-RWC000a-SC-solution000018.solution
+RWC000a-TSO.param	conjure-output/model000001-RWC000a-TSO-solution000036.solution
+RWC001-SC.param	conjure-output/model000001-RWC001-SC-solution000007.solution
+RWC001-TSO.param	conjure-output/model000001-RWC001-TSO-solution000015.solution
+RWC002-SC.param	conjure-output/model000001-RWC002-SC-solution000007.solution
+RWC002-TSO.param	conjure-output/model000001-RWC002-TSO-solution000008.solution
+RWC003-SC.param	conjure-output/model000001-RWC003-SC-solution000007.solution
+RWC003-TSO.param	conjure-output/model000001-RWC003-TSO-solution000008.solution
+RWC004-SC.param	conjure-output/model000001-RWC004-SC-solution000007.solution
+RWC004-TSO.param	conjure-output/model000001-RWC004-TSO-solution000008.solution
+SB000-SC.param	conjure-output/model000001-SB000-SC-solution000003.solution
+SB000-TSO.param	conjure-output/model000001-SB000-TSO-solution000015.solution
+SB000a-SC.param	conjure-output/model000001-SB000a-SC-solution000004.solution
+SB000a-TSO.param	conjure-output/model000001-SB000a-TSO-solution000018.solution
+SB001-SC.param	conjure-output/model000001-SB001-SC-solution000003.solution
+SB001-TSO.param	conjure-output/model000001-SB001-TSO-solution000015.solution
+SB001a-SC.param	conjure-output/model000001-SB001a-SC-solution000005.solution
+SB001a-TSO.param	conjure-output/model000001-SB001a-TSO-solution000036.solution
+SB003-SC.param	conjure-output/model000001-SB003-SC-solution000003.solution
+SB003-TSO.param	conjure-output/model000001-SB003-TSO-solution000015.solution
+SB005-SC.param	conjure-output/model000001-SB005-SC-solution000003.solution
+SB005-TSO.param	conjure-output/model000001-SB005-TSO-solution000004.solution
+SB006-SC.param	conjure-output/model000001-SB006-SC-solution000003.solution
+SB006-TSO.param	conjure-output/model000001-SB006-TSO-solution000004.solution
+SB007-SC.param	conjure-output/model000001-SB007-SC-solution000003.solution
+SB007-TSO.param	conjure-output/model000001-SB007-TSO-solution000004.solution
+SB008-SC.param	conjure-output/model000001-SB008-SC-solution000003.solution
+SB008-TSO.param	conjure-output/model000001-SB008-TSO-solution000004.solution
+SB009-SC.param	conjure-output/model000001-SB009-SC-solution000003.solution
+SB009-TSO.param	conjure-output/model000001-SB009-TSO-solution000004.solution
+SB010-SC.param	conjure-output/model000001-SB010-SC-solution000003.solution
+SB010-TSO.param	conjure-output/model000001-SB010-TSO-solution000004.solution
+SB013-SC.param	conjure-output/model000001-SB013-SC-solution000003.solution
+SB013-TSO.param	conjure-output/model000001-SB013-TSO-solution000004.solution
+W+RWC000-SC.param	conjure-output/model000001-W+RWC000-SC-solution000007.solution
+W+RWC000-TSO.param	conjure-output/model000001-W+RWC000-TSO-solution000015.solution
+W+RWC001-SC.param	conjure-output/model000001-W+RWC001-SC-solution000007.solution
+W+RWC001-TSO.param	conjure-output/model000001-W+RWC001-TSO-solution000008.solution
+WRC000-SC.param	conjure-output/model000001-WRC000-SC-solution000018.solution
+WRC000-TSO.param	conjure-output/model000001-WRC000-TSO-solution000018.solution
+WRC001-SC.param	conjure-output/model000001-WRC001-SC-solution000024.solution
+WRC001-TSO.param	conjure-output/model000001-WRC001-TSO-solution000024.solution
+WRW+WR000-SC.param	conjure-output/model000001-WRW+WR000-SC-solution000010.solution
+WRW+WR000-TSO.param	conjure-output/model000001-WRW+WR000-TSO-solution000021.solution
+WRW+WR001-SC.param	conjure-output/model000001-WRW+WR001-SC-solution000007.solution
+WRW+WR001-TSO.param	conjure-output/model000001-WRW+WR001-TSO-solution000015.solution
+WRW+WR002-SC.param	conjure-output/model000001-WRW+WR002-SC-solution000007.solution
+WRW+WR002-TSO.param	conjure-output/model000001-WRW+WR002-TSO-solution000008.solution
+WRW+WR003-SC.param	conjure-output/model000001-WRW+WR003-SC-solution000007.solution
+WRW+WR003-TSO.param	conjure-output/model000001-WRW+WR003-TSO-solution000008.solution
+WRW+WR004-SC.param	conjure-output/model000001-WRW+WR004-SC-solution000007.solution
+WRW+WR004-TSO.param	conjure-output/model000001-WRW+WR004-TSO-solution000008.solution
+Z6.0000-SC.param	conjure-output/model000001-Z6.0000-SC-solution000010.solution
+Z6.0000-TSO.param	conjure-output/model000001-Z6.0000-TSO-solution000021.solution
+Z6.0001-SC.param	conjure-output/model000001-Z6.0001-SC-solution000007.solution
+Z6.0001-TSO.param	conjure-output/model000001-Z6.0001-TSO-solution000008.solution
+Z6.4000-SC.param	conjure-output/model000001-Z6.4000-SC-solution000010.solution
+Z6.4000-TSO.param	conjure-output/model000001-Z6.4000-TSO-solution000045.solution
+Z6.4003-SC.param	conjure-output/model000001-Z6.4003-SC-solution000007.solution
+Z6.4003-TSO.param	conjure-output/model000001-Z6.4003-TSO-solution000008.solution
+Z6.5000-SC.param	conjure-output/model000001-Z6.5000-SC-solution000010.solution
+Z6.5000-TSO.param	conjure-output/model000001-Z6.5000-TSO-solution000021.solution
+Z6.5001-SC.param	conjure-output/model000001-Z6.5001-SC-solution000007.solution
+Z6.5001-TSO.param	conjure-output/model000001-Z6.5001-TSO-solution000008.solution

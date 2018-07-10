@@ -1,0 +1,17 @@
+X86 CoRW1003
+"PosRW Wsi Rfe"
+Cycle=Rfe PosRW Wsi
+Relax=Rfe
+Safe=Wsi PosRW
+Generator=diy7 (version 7.49)
+Prefetch=
+Com=Rf
+Orig=PosRW Wsi Rfe
+{
+}
+ P0          ;
+ MOV EAX,[x] ;
+ MOV [x],$1  ;
+ MOV [x],$2  ;
+exists
+(x=2 /\ 0:EAX=0)

@@ -1,0 +1,17 @@
+X86 CoRW2001
+"Rfe PosRR Fri Wse"
+Cycle=Rfe PosRR Fri Wse
+Relax=Rfe
+Safe=Fri Wse PosRR
+Generator=diy7 (version 7.49)
+Prefetch=
+Com=Rf Ws
+Orig=Rfe PosRR Fri Wse
+{
+}
+ P0         | P1          ;
+ MOV [x],$1 | MOV EAX,[x] ;
+            | MOV EBX,[x] ;
+            | MOV [x],$2  ;
+exists
+(x=2 /\ 1:EAX=1 /\ 1:EBX=1)

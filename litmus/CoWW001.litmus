@@ -1,0 +1,17 @@
+X86 CoWW001
+"Rfi PosRW Wse"
+Cycle=Rfi PosRW Wse
+Relax=Rfi
+Safe=Wse PosRW
+Generator=diy7 (version 7.49)
+Prefetch=
+Com=Ws
+Orig=Rfi PosRW Wse
+{
+}
+ P0          ;
+ MOV [x],$1  ;
+ MOV EAX,[x] ;
+ MOV [x],$2  ;
+exists
+(x=2 /\ 0:EAX=1)

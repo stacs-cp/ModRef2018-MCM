@@ -1,0 +1,17 @@
+X86 CoWR0004
+"Wsi Rfi Fre"
+Cycle=Rfi Fre Wsi
+Relax=Rfi
+Safe=Fre Wsi
+Generator=diy7 (version 7.49)
+Prefetch=
+Com=Fr
+Orig=Wsi Rfi Fre
+{
+}
+ P0          ;
+ MOV [x],$1  ;
+ MOV [x],$2  ;
+ MOV EAX,[x] ;
+exists
+(x=2 /\ 0:EAX=2)

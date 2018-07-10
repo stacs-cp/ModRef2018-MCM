@@ -1,0 +1,18 @@
+
+letting CORE be new type enum {c1, c2}
+letting REGISTER be new type enum {r1, r2}
+letting VARIABLE be new type enum {x, y}
+letting VALUE be new type enum {Initial, v0, v1}
+
+letting maxNbOperationsPerCore be 2
+
+letting initial_step_of_registers be Initial
+letting initial_step_of_variables be v0
+letting final_step_of_registers be function( (c1, r1) --> v0, (c2, r1) --> v1 )
+letting final_step_of_variables be function()
+
+letting MCM be SC
+$ letting MCM be TSO
+
+letting exclude_programs be {}
+letting include_programs be

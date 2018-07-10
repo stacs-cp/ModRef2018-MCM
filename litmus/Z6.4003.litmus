@@ -1,0 +1,16 @@
+X86 Z6.4003
+"PodWW Wse PodWR Fre PodWR Fre"
+Cycle=Fre PodWW Wse PodWR Fre PodWR
+Relax=PodWR
+Safe=Fre Wse PodWW
+Generator=diy7 (version 7.49)
+Prefetch=0:x=F,0:y=W,1:y=F,1:z=T,2:z=F,2:x=T
+Com=Ws Fr Fr
+Orig=PodWW Wse PodWR Fre PodWR Fre
+{
+}
+ P0         | P1          | P2          ;
+ MOV [x],$1 | MOV [y],$2  | MOV [z],$1  ;
+ MOV [y],$1 | MOV EAX,[z] | MOV EAX,[x] ;
+exists
+(y=2 /\ 1:EAX=0 /\ 2:EAX=0)

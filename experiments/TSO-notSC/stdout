@@ -1,0 +1,72 @@
+ ==> Listing TSO programs -- lingeling - A
+Using cached models.
+Savile Row: model000001.eprime A-TSO-list.param
+
+real	0m31.690s
+user	0m36.933s
+sys	0m0.975s
+ ==> Creating SC include list -- lingeling - A
+ ==> Listing SC programs -- lingeling - A
+Using cached models.
+Savile Row: model000001.eprime A-SC-list.param
+
+real	0m52.909s
+user	1m31.503s
+sys	0m1.138s
+  132 results/A-allSC.list
+  160 results/A-allTSO.list
+   28 results/A-onlyTSO.list
+ ==> Listing TSO programs -- lingeling - B
+Using cached models.
+Savile Row: model000001.eprime B-TSO-list.param
+
+real	11m15.836s
+user	10m56.456s
+sys	0m13.682s
+ ==> Creating SC include list -- lingeling - B
+ ==> Listing SC programs -- lingeling - B
+Using cached models.
+Savile Row: model000001.eprime B-SC-list.param
+
+real	129m2.731s
+user	153m34.990s
+sys	0m41.752s
+   776 results/B-allSC.list
+  1154 results/B-allTSO.list
+   378 results/B-onlyTSO.list
+ ==> Listing TSO programs -- minion - A
+Using cached models.
+Savile Row: model000001.eprime A-TSO-list.param
+
+real	0m17.946s
+user	0m25.991s
+sys	0m0.288s
+ ==> Creating SC include list -- minion - A
+ ==> Listing SC programs -- minion - A
+Using cached models.
+Savile Row: model000001.eprime A-SC-list.param
+
+real	0m46.378s
+user	0m57.857s
+sys	0m0.495s
+  132 results/A-allSC.list
+  160 results/A-allTSO.list
+   28 results/A-onlyTSO.list
+ ==> Listing TSO programs -- minion - B
+Using cached models.
+Savile Row: model000001.eprime B-TSO-list.param
+
+real	179m11.316s
+user	179m14.509s
+sys	0m3.159s
+ ==> Creating SC include list -- minion - B
+ ==> Listing SC programs -- minion - B
+Using cached models.
+Savile Row: model000001.eprime B-SC-list.param
+
+real	30m57.189s
+user	30m56.769s
+sys	0m18.561s
+   776 results/B-allSC.list
+  1154 results/B-allTSO.list
+   378 results/B-onlyTSO.list
