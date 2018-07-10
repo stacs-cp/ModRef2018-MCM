@@ -15,6 +15,7 @@
 \usepackage{listings}
 \usepackage{cleveref}
 
+\usepackage{xspace}
 
 % If you use the hyperref package, please uncomment the following line
 % to display URLs in blue roman font according to Springer's eBook style:
@@ -95,19 +96,21 @@ These studies demonstrate the flexibility of constrains programming in this cont
 
 Concurrent programming is orchestrated through the software facing cache coherence protocols and the hardware facing memory consistency models.
 The orchestration ensures that the many processors do not interfere with shared resources or receive inconsistent data.
-A \emph{memory consistency model} (MCM) describes the observed behaviour of processors and memory.
+A \emph{memory consistency model} (MCM) describes the observed behaviour on the hardware between  processors and memory.
 While a \emph{cache coherence protocol} (CCP) limits the behaviour of the program to mimic the behaviour of the hardware.
 Part of the testing of MCMs and CCPs is to check their executions of \emph{litmus tests}.
 These tests consist of very basic operations between processors and the memory.
 Such operations are storing a value to a variable and loading a variable into a register.
-Depending on the MCM there are more specific operations such as fences, but for the scope of this paper we will only consider loads and stores.
-Each litmus test starts off with all variables in a given initial state.
+Depending on the MCM there are more operations such as fences, but for the scope of this paper we will only consider loads and stores.
+Each litmus test has an initial state for all variables and registers.
 This can be specified, but in general all variables have the same initial state, with value 0.
-Unless otherwise mentioned, we will assume this to be true in the scope of this paper and all our examples and experiments.
-Each litmus test has a specified final allowed (or prohibited) state.
-This final state is found through the concurrent execution of the programs for each core.
-There can be many different outcomes of the litmus test, as they depend on the concurrent interleaving of the programs in each processor.
-Another reason for the variety of outcomes is the relaxation of the order of execution of the programs within the processors.
+Unless otherwise mentioned, we will assume this to be true in the scope of this paper.
+For each processor there is a sequence of operations given, which we will call the program of the processor.
+Each litmus test has a specified final allowed (or prohibited) state of the variables and registers.
+A run through a litmus test is called an \emph{execution}.
+This final state is found through the concurrent execution of the programs for each processor.
+There can be many different final states of the litmus test, as they depend on the concurrent interleaving of the programs from each processor.
+Another reason for the variety of final states is the relaxation of the order of execution of the programs within the processors.
 These relaxations are defined for each MCM differently, and we will discuss them for our two chosen MCMs in Sections~\ref{sec:sc} and \ref{sec:tso}.
 
 \begin{exa}
@@ -116,14 +119,13 @@ Table~\ref{tab:litmus} shows a litmus test.
 This test is over two processors, {\sf{Proc 0}} and {\sf{Proc 1}}.
 Each of them is executing a load and a store operation.
 The load operation is written as {\sf{MOV EAX $\leftarrow [x]$}} and means that the variable $x$ is read into the register {\sf{EAX}} of a processor.
-In the table below we can see that it is {\sf{Proc 0}}.
 The store operation is written as {\sf{MOV $[x] \leftarrow$ 2}} and means that the value 2 is stored into the variable $x$.
 The variable $x$ is globally visible to all processors.
 The final state for this litmus test is given as an allowed state.
 We can expect the variable $x$ to contain the value 2, and the register {\sf{EAX}} on {\sf{Proc0}} will contain the value 1, while the register {\sf{EAX}} on {\sf{Proc1}} will contain the value 2.
-A run through a litmus test is called an \emph{execution}.
 
-\begin{table}
+
+\begin{table}[H]
 \begin{center}
 {\textsf{
     \begin{tabular}{|L{3cm}|L{3cm}|}
@@ -131,7 +133,7 @@ A run through a litmus test is called an \emph{execution}.
         \multicolumn{1}{|c}{Proc 0} & \multicolumn{1}{c|}{Proc 1} \\ \hline
         MOV $[x] \leftarrow$ 1 & MOV $[x] \leftarrow$ 2  \\ \hline
         MOV EAX $\leftarrow [x]$ & MOV EAX $\leftarrow [x]$ \\ \hline
-       \multicolumn{2}{|l|}{Allowed outcome} \\
+       \multicolumn{2}{|l|}{Allowed final state} \\
        \multicolumn{2}{|l|}{($x=$ 2 $\land$ Proc0:EAX=1 $\land$ Proc1:EAX=2)} \\ \hline
     \end{tabular}
 }}
@@ -145,11 +147,11 @@ A run through a litmus test is called an \emph{execution}.
 Amongst other case studies, this paper will model MCMs as constraint models, and will generate litmus tests which adhere to those models as well as finding all possible final states of variables and registers.
 
 There are currently tools which are approaching the litmus test generation through simulations of MCMs \cite{alglave2014}.
-The usage of the toolset provided through diy and herd is complex and required deep knowledge of the MCMs one wants to work with.
-The herd tool set is designed to generate and test newly designed MCMs, which are defined in terms of relations between the operations and executions.
+The usage of the toolset provided through {\tt{diy7}} and {\tt{herd7}} is complex and required deep knowledge of the MCMs one wants to work with.
+The {\tt{herd7tool}} set is designed to generate and test newly designed MCMs, which are defined in terms of relations between the operations and executions.
 The TriCheck tool \cite{trippel2017} verifies the whole system from language to the architecture level, which aids with the evaluation of the compiler.
 Both approaches do not use constraint programming, which is our contribution, as the constraint model descriptions for MCMs are short and follow the simple definitions of the MCMs.
-The models are written in Conjure \cite{akgun2014extensible,akgun2013automated,akgun2011extensible} and translated to input suitable for the constraint solver Minion and the SAT solver lingeling by Savile Row \cite{nightingale2017automatically}.
+The models are written in \conjure{} \cite{akgun2014extensible,akgun2013automated,akgun2011extensible} and translated to input suitable for the constraint solver Minion and the SAT solver lingeling by \savilerow{} \cite{nightingale2017automatically}.
 
 \begin{figure}
     \begin{center}
@@ -159,7 +161,7 @@ The models are written in Conjure \cite{akgun2014extensible,akgun2013automated,a
         \node at (0.5,0) {SC};
         \node at (1.5,0) {TSO};
     \end{tikzpicture}
-    \caption{Intersection of all sets of valid executions of litmus tests.}
+    \caption{TSO is a relaxation of SC.}
     \label{fig:venn}
     \end{center}
 \end{figure}
@@ -167,9 +169,9 @@ The models are written in Conjure \cite{akgun2014extensible,akgun2013automated,a
 
 This paper will contain the \emph{sequential consistency} (SC) model which we discuss in Section~\ref{sec:sc} and the \emph{total store order} (TSO) model in Section~\ref{sec:tso}.
 TSO is a relaxation of the SC model and thus will allow for more behaviour than SC.
-This is reflected in the number of allowed outcomes from the litmus tests.
-Figure~\ref{fig:venn} is an illustration of the sets of valid outcomes of litmus tests depending on the MCM, comparing SC to TSO.
-We build Essence models of these MCMs, and we will use them to
+This is reflected in the number of allowed final states from the litmus tests and the number of tests for a given final state.
+Figure~\ref{fig:venn} is an illustration of the sets of valid final states of litmus tests depending on the MCM, comparing SC to TSO.
+We build \essence{} models of these MCMs, and we will use them to
 \begin{itemize}
     \item simulate litmus test executions, for given allowed final state for each MCM
     \item generate litmus tests for given allowed final states, for each MCM
@@ -179,7 +181,6 @@ We build Essence models of these MCMs, and we will use them to
 
 
 These case studies are a stepping stone towards using constraint models to directly and automatically verify MCMs against CCPs.
-Similar work in this direction, with a few additional manual proofs were done in \cite{banks2017verification}.
 
 
 \section{Memory Consistency Model}
@@ -226,10 +227,10 @@ Another possible execution of the litmus test is
 \end{table}
 \vspace{-1cm}
 
-This execution still upholds the program order of both processors, but it violates the expected outcome as stipulated in the Table~\ref{tab:litmus}.
+This execution still upholds the program order of both processors, but it violates the expected final state as stipulated in Table~\ref{tab:litmus}.
 \end{exa}
 
-The set of allowed outcomes of litmus tests is highly dependent on the chosen MCM.
+The set of allowed final states of litmus tests is highly dependent on the chosen MCM.
 It is possible that we cannot find a valid execution that will lead to the expected allowed final state, within the given restrictions on the ordering of the operations.
 
 
@@ -244,7 +245,7 @@ the order specified by its program.''
 
 We can look at this in the following way, the order of any two operations has to be kept in the same way as they occur in the litmus test.
 It will still allow for the interleaving between the operations of different processors, but not more than that.
-This means that both executions as shown in Example~\ref{exa:litmus2}, are valid SC executions.
+This means that both executions as shown in Example~\ref{exa:litmus2}, are valid SC executions, while having different final states, and thus failing the litmus test in Table~\ref{tab:litmus}
 
 \begin{exa}
 \label{exa:sc}
@@ -320,7 +321,7 @@ In addition it can observe the following execution (amongst others)
 \end{table}
 \vspace{-1cm}
 
-It is impossible to find a valid SC execution of the litmus test in Example~\ref{exa:litmus} that would result in this final state.
+It is impossible to find a valid SC execution of the litmus test in Example~\ref{exa:litmus} that will result in this final state.
 \end{exa}
 
 
@@ -331,8 +332,8 @@ As we do not implement fences in our current constraint model of TSO we will sti
 \section{A Generic MCM Model}
 
 
-Figure~\ref{fig:essence1} shows the initial setup of the various components needed for any MCM.
-Each constraint models that we create for any MCM is defined over a finite number of cores (or processors), registers per core, variables and a finite number of values for the variables.
+Figure~\ref{fig:essence1} shows the initial setup of the various components needed for any MCM constraint model.
+Each constraint model that we create for any MCM is defined over a finite number of cores (or processors), registers per core, variables and a finite number of values for the variables.
 We also have to define the maximal number of operations that we can have in a litmus test, per processor.
 As mentioned above the only operations that we consider are stores and loads.
 Each store assigns a value to a global variable, and each load loads the variable into a processor's register.
@@ -340,7 +341,7 @@ Depending on the goal of the model, we will either generate a program (litmus te
 Each program consists of a sequence of operations for each core.
 Whereas an execution is a sequence of all operations in all cores combined.
 The maximal size of an execution of a litmus test will be the number of processors times the maximal number of operations per processors.
-Note that we use core and processor, and program and litmus test synonymously here and from now on.
+Note that we use core and processor, and program and litmus test synonymously here.
 
 A program is represented as a sequence of operations per core. An operation may either be a load or a store, so we use a \emph{variant type} to denote these. A variant type models a tagged union, in this case load and store are the tags. For a decision variable \texttt{x} with the domain \texttt{OPERATION}, we determine whether a given tag is active using the \texttt{active} operator of \essence{}: \texttt{active(x, load)} is true if and only if \texttt{x} denotes a load operation. When modelling with variant types we tend to use the \texttt{active} operator often together with a logical implication, where the left-hand-side of the implication determines which tag is active and the right-hand-side posts a constraint assuming that particular tag to be active. Syntactical support for a switch-case style discriminator for variant types does not exist in \essence{} yet.
 
@@ -385,7 +386,7 @@ find execution :
 
 
 We have to tell the model that each operation in the litmus tests can only occur once in the execution.
-In addition, in Figure~\ref{fig:essence2} there is the implied constraint that because every operation in the program is occurring exactly once in an execution then the length of the execution is the number of all operations of all cores in the program.
+In addition, in Figure~\ref{fig:essence2} there is the implied constraint states that very operation in the program is occurring exactly once in an execution then the length of the execution is exactly the number of all operations of all cores in the program.
 
 \begin{figure}
 \begin{lstlisting}
@@ -428,7 +429,7 @@ such that
 
 The initialisation of the variables and registers is shown in Figure~\ref{fig:essence-step1}.
 The registers have a special empty/initial value given to them, is different to the value a variable can contain at anytime, including the initial value a variable might contain.
-The initial value of a variable might be reassigned to the variables in the course of a program, where as the initial value of the register cannot be re-attained.
+The initial value of a variable might be reassigned to the variables in the course of a program, whereas the initial value of the register cannot be re-attained.
 
 \begin{figure}
 \begin{lstlisting}
@@ -453,7 +454,8 @@ such that
   forAll ((core, reg), val) in mapping .
    $ if it takes the INITIAL value now, it must have been INITIAL always
    initial_state_of_registers = val ->
-   initial_state_of_registers = state_of_registers(index-1)((core, reg))
+   initial_state_of_registers =
+       state_of_registers(index-1)((core, reg))
 \end{lstlisting}
 \caption{Variable and register initialisations.\label{fig:essence-step1}}
 \end{figure}
@@ -469,8 +471,10 @@ The next state of that variable will contain the value assigned to it in the sto
 
 \begin{figure}
 \begin{lstlisting}
-$ defining the state_of_registers and state_of_variables in terms of the execution
-$ define step(index+1) in terms of step(index) and execution(index)
+$ defining the state_of_registers and state_of_variables
+$ in terms of the execution
+$ define step(index+1) in terms of step(index)
+$ and execution(index)
 such that
  forAll (index, (core, operation)) in execution .
   and([
@@ -506,15 +510,16 @@ such that
 \end{figure}
 
 
-As we are interested in the different allowed outcomes of a program we include parameters limiting the set of allowed outcomes.
+As we are interested in the different allowed final states of a program we include parameters limiting the set of allowed final states.
 In Figure~\ref{fig:essence6} we define the constraints that we have to reach a given final state.
-We also allow for the initial states of the variables and registers to be defined in a flexible way, but for the set of test in Section~\ref{sec:appl} we kept the initial states to be the same.
+We also allow for the initial states of the variables and registers to be defined in a flexible way, but for the set of tests in Section~\ref{sec:appl} we kept the initial states to be the same.
 The include and exclude program sets are used to compare the different MCMs to each other.
 We will generate a larger set of litmus tests that all hold for the relaxed TSO and filter out the tests that do not hold in the stricter SC model.
 
 \begin{figure}
 \begin{lstlisting}
-$ a way to post constraints on the initial and the final values that are stored in each register and variable
+$ a way to post constraints on the initial and the final
+$ values that are stored in each register and variable
 $ doesn't have to mention all registers.
 given initial_state_of_registers, initial_state_of_variables : VALUE
 given final_state_of_registers : function (CORE, REGISTER) --> VALUE
@@ -540,8 +545,8 @@ branching on [program]
 
 
 \subsection{Sequential Consistency}
-As introduced in Section~\ref{sec:sc} the SC MCM defines that any two operations of a core will occur in an execution in the same order as they are written in the program for each core.
-In Figure~\ref{fig:essenceSC} we define the constraints which enforce SC in the execution of a litmus test.
+As introduced in Section~\ref{sec:sc} SC defines that any two operations of a core will occur in an execution in the same order as they are written in the program for each core.
+In Figure~\ref{fig:essenceSC} we define the constraints which enforces SC in the execution of a litmus test.
 We use the index of the execution, which is a sequence of operations, to track the ordering of the operations in relation to their index in the program on the core.
 Operations from other cores can be interleaved.
 
@@ -576,7 +581,8 @@ such that MCM = TSO ->
   forAll index1, index2 in defined(operations) .
    index1 < index2 /\
    $ if the first is a store, and the second is a load, do not post any constraints
-   !(active(operations(index1), store) /\ active(operations(index2), load)) ->
+   !(active(operations(index1), store) /\
+       active(operations(index2), load)) ->
     exists indexE1, indexE2 in defined(execution) .
      indexE1 < indexE2 /\
      execution(indexE1) = (core, operations(index1)) /\
@@ -589,7 +595,7 @@ such that MCM = TSO ->
 
 \section{Case Studies}
 \label{sec:appl}
-All the files generated and experiments mentioned can be found in a github repository\footnote{\url{https://github.com/stacs-cp/ModRef2018-MCM}} and can be reproduced using Conjure, Essence, Savile Row, lingeling and the herd7tool sets. 
+All the files generated and experiments mentioned can be found in a github repository\footnote{\url{https://github.com/stacs-cp/ModRef2018-MCM}} and can be reproduced using \conjure{}, \essence{}, \savilerow{}, lingeling and the {\tt{herd7tool}} sets.
 
 \subsection{Litmus Test Simulation}
 We used the {\tt{herd7tool}} set \cite{alglave2014} to generate litmus tests for TSO and SC.
@@ -608,9 +614,9 @@ This resulted in 65 litmus tests.
 \end{figure}
 
 
-We translated the litmus tests into a Essence parameter file.
-The litmus test in Example~\ref{exa:litmus} is in fact the generated {\tt{SB000a}} litmus test.
-The corresponding Essence parameter file is shown in Figure~\ref{fig:essenceparam}.
+We translated the litmus tests into a \essence{} parameter file.
+The litmus test in Example~\ref{exa:litmus} is the generated {\tt{SB000a}} litmus test.
+The corresponding \essence{} parameter file is shown in Figure~\ref{fig:essenceparam}.
 We set the cores, registers, variables and available values, and we limit the maximal number of operations per core.
 The initial states of both the registers and the variables are also given.
 We take the final states of the registers and variables from the generated litmus test.
@@ -630,32 +636,31 @@ letting maxNbOperationsPerCore be 2
 letting initial_step_of_registers be Initial
 letting initial_step_of_variables be v0
 letting final_step_of_variables be function
-    ( x --> v2 )
+ ( x --> v2 )
 letting final_step_of_registers be function
-    ( (c1,r1) --> v1
-    , (c2,r2) --> v2
-    )
+ ( (c1,r1) --> v1
+ , (c2,r2) --> v2
+ )
 
 letting MCM be SC
 $ letting MCM be TSO
 
 letting include_programs be {
-    function(c1 --> sequence( variant {store = record {variable = x, value = v1}}
-                            , variant {load = record {register = r1, variable = x}}
-                            )
-            ,c2 --> sequence( variant {store = record {variable = x, value = v2}}
-                            , variant {load = record {register = r2, variable = x}}
-                            ))
+ function(c1 --> sequence( variant {store = record {variable = x, value = v1}}
+    , variant {load = record {register = r1, variable = x}}
+ )
+ ,c2 --> sequence( variant {store = record {variable = x, value = v2}}
+    , variant {load = record {register = r2, variable = x}}
+ ))
 }
-
 
 letting exclude_programs be {}
 \end{lstlisting}
-\caption{Essence parameter file of a litmus test.\label{fig:essenceparam}}
+\caption{\essence{} parameter file of a litmus test.\label{fig:essenceparam}}
 \end{figure}
 
 
-We used these 65 tests to simulate and check that our implementation of the SC and TSO.
+We used these 65 tests to simulate and check our implementation of the SC and TSO.
 We have found that our constraint model of SC (Figure~\ref{fig:essenceSC}) is valid on the same 29 tests as the {\tt{herd7}} SC model described in terms of the relations between operations in Figure~\ref{fig:herdSC}.
 
 \begin{figure}
@@ -674,7 +679,7 @@ acyclic po | fr | rf | co as sc
 
 
 Similarly, our TSO model in Figure~\ref{fig:essenceTSO} corresponds to a more restricted version of the x86-TSO model, as we currently still restrict the ordering of stores followed by loads from external cores.
-This is apparent by running the {\tt{herd7}} TSO model in Figure~\ref{fig:herdTSO} which accepts the same 51 tests as our Essence TSO model.
+This is apparent by running the {\tt{herd7}} TSO model in Figure~\ref{fig:herdTSO} which accepts the same 51 tests as our \essence{} TSO model.
 \begin{figure}
 \begin{lstlisting}
 include "cos.cat"
@@ -694,42 +699,42 @@ show ghb
 
 
 
-\subsection{Generation}
+\subsection{Litmus Test Generation}
 Having shown that our SC and TSO models are correctly reflecting the behaviour, we have gone further to generate more litmus test using constraint solvers.
 We produced sets of litmus tests which were given a static number of cores, registers, variables, values and a maximal number of operations per core.
-In addition, we specified the allowed outcome of the litmus test.
-We let the solvers generate a set of litmus tests that had at least one valid execution in TSO with the allowed outcome.
+In addition, we specified the allowed final state of the litmus test.
+We let the solvers generate a set of litmus tests that had at least one valid execution in TSO with the allowed final state.
 Then we filtered those tests to see which would still have a valid execution in SC.
 We have done this for two different scenarios.
 Both have 2 cores, 2 registers per core, 2 variables and 2 possible values.
 
 In the first scenario each core can have up to 2 operations, and we have set the final state of the registers to be that one register on one core contains an initial value and one register of the other core contains the value 1.
-For TSO this resulted in a total of 160 litmus test, of which 132 has a valid SC execution.
+For TSO this resulted in a total of 160 litmus test, of which 132 have a valid SC execution.
 
 The second scenario has for each core up to 3 operations and the final state for the registers is restricted to the first register of both cores having the value 0 and the second register on both cores to have the value 1.
 We generated 1154 litmus test with a valid execution in TSO, and thereof 776 have a valid execution in SC.
 
 \subsection{Output Generation}
-Any litmus test consists of a sequence of operations per core and an allowed final state.
-We pursued to see how many valid output states can be found for a given program, depending on the MCM.
-This alteration of the question is simple to do in a constraint model.
+Any litmus test consists of a program per core and an allowed final state of any execution.
+We pursued to see how many valid and distinct final states can be found for a given program, depending on the MCM.
 We used the generated litmus tests from {\tt{diy7}} and ignored the required final states.
 The solvers now use the models for TSO and SC to find all executions with distinct allowed final states, which are a combination of both variables and registers and do not have to be enforced on all variables and registers available.
 
-We find that for all litmus tests there is always a valid execution with a valid final state, for either SC and TSO.
+We find that for all litmus tests there is always a valid execution with a valid final state, for both SC and TSO.
 
 The highest number of distinct final states for a litmus test is 72 ({\tt{IRIW000}}).
 This number of distinct final states is true for both TSO and SC.
 The litmus test with the next highest number of possible final states (63) for TSO is {\tt{3.SB000}}, which only has 7 distinct final states for SC.
 
-
+For SC most litmus tests have less than 10 distinct final states.
+While this observation can be also made for TSO, there are fewer litmus tests which have only 1 distinct final state.
 
 \section{Conclusion}
 We have shown that using constraint programming to model MCMs and to use them to generate litmus tests is a viable alternative to algorithms and other tools.
 Using constraint programming is a highly flexible way to re-use the models for different scenarios and different uses.
 We also find that the models created are a lot smaller than what can be created with model checking. As in that context the models face the state explosion problem.
 Our aim with this work is to be able to implement cache coherence protocols along side the MCMs and to directly verify these two models against each other.
-This would follow the work as done by Banks et al \cite{banks2017verification}, but would be increasingly automated.
+Work in this direction but using model checking and a few additional manual proofs were done in \cite{banks2017verification}.
 We believe constraint programming to be an ideal contender for this problem, as our current models suggest to be smaller than the model checking models.
 
 \bibliographystyle{splncs04}
