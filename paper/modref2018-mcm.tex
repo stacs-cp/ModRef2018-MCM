@@ -13,7 +13,7 @@
 \usepackage{tikz}
 
 \usepackage{listings}
-\usepackage{cleveref}
+\usepackage[nameinlink]{cleveref}
 
 \usepackage{xspace}
 
@@ -111,11 +111,11 @@ A run through a litmus test is called an \emph{execution}.
 This final state is found through the concurrent execution of the programs for each processor.
 There can be many different final states of the litmus test, as they depend on the concurrent interleaving of the programs from each processor.
 Another reason for the variety of final states is the relaxation of the order of execution of the programs within the processors.
-These relaxations are defined for each MCM differently, and we will discuss them for our two chosen MCMs in Sections~\ref{sec:sc} and \ref{sec:tso}.
+These relaxations are defined for each MCM differently, and we will discuss them for our two chosen MCMs in \Cref{sec:sc} and \Cref{sec:tso}.
 
 \begin{exa}
 \label{exa:litmus}
-Table~\ref{tab:litmus} shows a litmus test.
+\Cref{tab:litmus} shows a litmus test.
 This test is over two processors, {\sf{Proc 0}} and {\sf{Proc 1}}.
 Each of them is executing a load and a store operation.
 The load operation is written as {\sf{MOV EAX $\leftarrow [x]$}} and means that the variable $x$ is read into the register {\sf{EAX}} of a processor.
@@ -167,10 +167,10 @@ The models are written in \conjure{} \cite{akgun2014extensible,akgun2013automate
 \end{figure}
 
 
-This paper will contain the \emph{sequential consistency} (SC) model which we discuss in Section~\ref{sec:sc} and the \emph{total store order} (TSO) model in Section~\ref{sec:tso}.
+This paper will contain the \emph{sequential consistency} (SC) model which we discuss in \Cref{sec:sc} and the \emph{total store order} (TSO) model in \Cref{sec:tso}.
 TSO is a relaxation of the SC model and thus will allow for more behaviour than SC.
 This is reflected in the number of allowed final states from the litmus tests and the number of tests for a given final state.
-Figure~\ref{fig:venn} is an illustration of the sets of valid final states of litmus tests depending on the MCM, comparing SC to TSO.
+\Cref{fig:venn} is an illustration of the sets of valid final states of litmus tests depending on the MCM, comparing SC to TSO.
 We build \essence{} models of these MCMs, and we will use them to
 \begin{itemize}
     \item simulate litmus test executions, for given allowed final state for each MCM
@@ -192,7 +192,7 @@ These two orderings are called \emph{program order} and \emph{memory order} resp
 
 \begin{exa}
 \label{exa:litmus2}
-The litmus test in Example~\ref{exa:litmus} shows the program order for both {\sf{Proc0}} and {\sf{Proc1}}.
+The litmus test in \Cref{exa:litmus} shows the program order for both {\sf{Proc0}} and {\sf{Proc1}}.
 It is the order that the operations are given to the processor, in both cases that is a store followed by a load.
 An possible execution of that litmus test is
 \begin{table}[H]
@@ -227,7 +227,7 @@ Another possible execution of the litmus test is
 \end{table}
 \vspace{-1cm}
 
-This execution still upholds the program order of both processors, but it violates the expected final state as stipulated in Table~\ref{tab:litmus}.
+This execution still upholds the program order of both processors, but it violates the expected final state as stipulated in \Cref{tab:litmus}.
 \end{exa}
 
 The set of allowed final states of litmus tests is highly dependent on the chosen MCM.
@@ -245,11 +245,11 @@ the order specified by its program.''
 
 We can look at this in the following way, the order of any two operations has to be kept in the same way as they occur in the litmus test.
 It will still allow for the interleaving between the operations of different processors, but not more than that.
-This means that both executions as shown in Example~\ref{exa:litmus2}, are valid SC executions, while having different final states, and thus failing the litmus test in Table~\ref{tab:litmus}
+This means that both executions as shown in \Cref{exa:litmus2}, are valid SC executions, while having different final states, and thus failing the litmus test in \Cref{tab:litmus}
 
 \begin{exa}
 \label{exa:sc}
-In addition to the two executions shown in Example~\ref{exa:litmus2}, below are all executions that can happen in SC when executing the litmus test in Table~\ref{tab:litmus}.
+In addition to the two executions shown in \Cref{exa:litmus2}, below are all executions that can happen in SC when executing the litmus test in \Cref{tab:litmus}.
 \begin{table}[H]
 {\sf{
     \begin{tabular}{L{1cm}L{1cm}|R{2.5cm}}
@@ -304,7 +304,7 @@ This relaxation allows for more possible executions and more allowed final state
 
 \begin{exa}
 \label{exa:tso}
-As TSO is a relaxation of SC, it will still observe the same executions of the litmus test in Example~\ref{exa:litmus}, as listed in Examples~\ref{exa:litmus2} and \ref{exa:sc}.
+As TSO is a relaxation of SC, it will still observe the same executions of the litmus test in \Cref{exa:litmus}, as listed in \Cref{exa:litmus2} and \Cref{exa:sc}.
 In addition it can observe the following execution (amongst others)
 \begin{table}[H]
 \begin{center}
@@ -321,7 +321,7 @@ In addition it can observe the following execution (amongst others)
 \end{table}
 \vspace{-1cm}
 
-It is impossible to find a valid SC execution of the litmus test in Example~\ref{exa:litmus} that will result in this final state.
+It is impossible to find a valid SC execution of the litmus test in \Cref{exa:litmus} that will result in this final state.
 \end{exa}
 
 
@@ -332,7 +332,7 @@ As we do not implement fences in our current constraint model of TSO we will sti
 \section{A Generic MCM Model}
 
 
-Figure~\ref{fig:essence1} shows the initial setup of the various components needed for any MCM constraint model.
+\Cref{fig:essence1} shows the initial setup of the various components needed for any MCM constraint model.
 Each constraint model that we create for any MCM is defined over a finite number of cores (or processors), registers per core, variables and a finite number of values for the variables.
 We also have to define the maximal number of operations that we can have in a litmus test, per processor.
 As mentioned above the only operations that we consider are stores and loads.
@@ -386,7 +386,7 @@ find execution :
 
 
 We have to tell the model that each operation in the litmus tests can only occur once in the execution.
-In addition, in Figure~\ref{fig:essence2} there is the implied constraint states that very operation in the program is occurring exactly once in an execution then the length of the execution is exactly the number of all operations of all cores in the program.
+In addition, in \Cref{fig:essence2} there is the implied constraint states that very operation in the program is occurring exactly once in an execution then the length of the execution is exactly the number of all operations of all cores in the program.
 
 \begin{figure}
 \begin{lstlisting}
@@ -407,7 +407,7 @@ such that
 
 As the execution progresses we need to keep track of the registers and variables.
 Each operation might alter the state of them.
-We also need to note that both variables and registers start off in an independent initial state, which is why in Figure~\ref{fig:essence4} the length of the sequences of all states of variables and registers is one longer than the execution, as the initial state exists before the execution starts.
+We also need to note that both variables and registers start off in an independent initial state, which is why in \Cref{fig:essence4} the length of the sequences of all states of variables and registers is one longer than the execution, as the initial state exists before the execution starts.
 
 \begin{figure}
 \begin{lstlisting}
@@ -427,11 +427,11 @@ such that
 \end{figure}
 
 
-The initialisation of the variables and registers is shown in Figure~\ref{fig:essence-step1}.
+The initialisation of the variables and registers is shown in \Cref{fig:essence-step1}.
 The registers have a special empty/initial value given to them, is different to the value a variable can contain at anytime, including the initial value a variable might contain.
 The initial value of a variable might be reassigned to the variables in the course of a program, whereas the initial value of the register cannot be re-attained.
 
-\begin{figure}
+\begin{figure}[t]
 \begin{lstlisting}
 $ defining the state_of_registers and state_of_variables in terms of the execution
 $ define step(1) as the initial step
@@ -461,7 +461,7 @@ such that
 \end{figure}
 
 
-Figure~\ref{fig:essence-step2} describes what happens to the variables and registers when an operation occurs.
+\Cref{fig:essence-step2} describes what happens to the variables and registers when an operation occurs.
 If the operation is a load, there is no change to the variables.
 Only the register on the core that the load has been called from changes.
 The next state of that register will contain the variable loaded.
@@ -511,12 +511,12 @@ such that
 
 
 As we are interested in the different allowed final states of a program we include parameters limiting the set of allowed final states.
-In Figure~\ref{fig:essence6} we define the constraints that we have to reach a given final state.
-We also allow for the initial states of the variables and registers to be defined in a flexible way, but for the set of tests in Section~\ref{sec:appl} we kept the initial states to be the same.
+In \Cref{fig:essence6} we define the constraints that we have to reach a given final state.
+We also allow for the initial states of the variables and registers to be defined in a flexible way, but for the set of tests in \Cref{sec:appl} we kept the initial states to be the same.
 The include and exclude program sets are used to compare the different MCMs to each other.
 We will generate a larger set of litmus tests that all hold for the relaxed TSO and filter out the tests that do not hold in the stricter SC model.
 
-\begin{figure}
+\begin{figure}[t]
 \begin{lstlisting}
 $ a way to post constraints on the initial and the final
 $ values that are stored in each register and variable
@@ -545,8 +545,8 @@ branching on [program]
 
 
 \subsection{Sequential Consistency}
-As introduced in Section~\ref{sec:sc} SC defines that any two operations of a core will occur in an execution in the same order as they are written in the program for each core.
-In Figure~\ref{fig:essenceSC} we define the constraints which enforces SC in the execution of a litmus test.
+As introduced in \Cref{sec:sc} SC defines that any two operations of a core will occur in an execution in the same order as they are written in the program for each core.
+In \Cref{fig:essenceSC} we define the constraints which enforces SC in the execution of a litmus test.
 We use the index of the execution, which is a sequence of operations, to track the ordering of the operations in relation to their index in the program on the core.
 Operations from other cores can be interleaved.
 
@@ -569,8 +569,8 @@ such that MCM = SC ->
 
 
 \subsection{Total Store Order}
-In Section~\ref{sec:tso} we discussed TSO, which is a relaxation of SC.
-Figure~\ref{fig:essenceTSO} uses the index of the operation in the program against the index in the execution sequence.
+In \Cref{sec:tso} we discussed TSO, which is a relaxation of SC.
+\Cref{fig:essenceTSO} uses the index of the operation in the program against the index in the execution sequence.
 In addition it uses the active constraint to check whether we can relax that ordering for a store load pair of operations.
 
 \begin{figure}
@@ -599,7 +599,7 @@ All the files generated and experiments mentioned can be found in a github repos
 
 \subsection{Litmus Test Simulation}
 We used the {\tt{herd7tool}} set \cite{alglave2014} to generate litmus tests for TSO and SC.
-Figure~\ref{fig:herd} shows the commands used for the litmus test generation using {\tt{diy7}}.
+\Cref{fig:herd} shows the commands used for the litmus test generation using {\tt{diy7}}.
 The litmus tests generated for TSO included tests with fences, which we ignored.
 This resulted in 65 litmus tests.
 \begin{figure}
@@ -615,8 +615,8 @@ This resulted in 65 litmus tests.
 
 
 We translated the litmus tests into a \essence{} parameter file.
-The litmus test in Example~\ref{exa:litmus} is the generated {\tt{SB000a}} litmus test.
-The corresponding \essence{} parameter file is shown in Figure~\ref{fig:essenceparam}.
+The litmus test in \Cref{exa:litmus} is the generated {\tt{SB000a}} litmus test.
+The corresponding \essence{} parameter file is shown in \Cref{fig:essenceparam}.
 We set the cores, registers, variables and available values, and we limit the maximal number of operations per core.
 The initial states of both the registers and the variables are also given.
 We take the final states of the registers and variables from the generated litmus test.
@@ -661,7 +661,7 @@ letting exclude_programs be {}
 
 
 We used these 65 tests to simulate and check our implementation of the SC and TSO.
-We have found that our constraint model of SC (Figure~\ref{fig:essenceSC}) is valid on the same 29 tests as the {\tt{herd7}} SC model described in terms of the relations between operations in Figure~\ref{fig:herdSC}.
+We have found that our constraint model of SC (\Cref{fig:essenceSC}) is valid on the same 29 tests as the {\tt{herd7}} SC model described in terms of the relations between operations in \Cref{fig:herdSC}.
 
 \begin{figure}
 \begin{lstlisting}
@@ -678,8 +678,8 @@ acyclic po | fr | rf | co as sc
 \end{figure}
 
 
-Similarly, our TSO model in Figure~\ref{fig:essenceTSO} corresponds to a more restricted version of the x86-TSO model, as we currently still restrict the ordering of stores followed by loads from external cores.
-This is apparent by running the {\tt{herd7}} TSO model in Figure~\ref{fig:herdTSO} which accepts the same 51 tests as our \essence{} TSO model.
+Similarly, our TSO model in \Cref{fig:essenceTSO} corresponds to a more restricted version of the x86-TSO model, as we currently still restrict the ordering of stores followed by loads from external cores.
+This is apparent by running the {\tt{herd7}} TSO model in \Cref{fig:herdTSO} which accepts the same 51 tests as our \essence{} TSO model.
 \begin{figure}
 \begin{lstlisting}
 include "cos.cat"
