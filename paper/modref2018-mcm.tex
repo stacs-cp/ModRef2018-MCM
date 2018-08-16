@@ -82,7 +82,7 @@
 \begin{abstract}
 Memory consistency models (MCMs) are at the heart of concurrent programming.
 They represent the behaviour of concurrent programs at the chip level.
-To test these models, currently small program snippets called litmus test are generated, which show allowed or forbidden behaviour of different MCMs.
+To test these models small program snippets called litmus test are generated, which show allowed or forbidden behaviour of different MCMs.
 This paper is showcasing the use of constraint programming to automate the generation and testing of litmus tests for memory consistency models.
 We produce a few exemplary case studies for two MCMs, namely Sequential Consistency and Total Store Order.
 These studies demonstrate the flexibility of constrains programming in this context and lay foundation to the direct verification of MCMs against the software facing cache coherence protocols.
@@ -106,7 +106,7 @@ Depending on the MCM there are more operations such as fences, but for the scope
 Each litmus test has an initial state for all variables and registers.
 This can be specified, but in general all variables have the same initial state, with value 0.
 Unless otherwise mentioned, we will assume this to be true in the scope of this paper.
-For each processor there is a sequence of operations given, which we will call the program of the processor.
+For each processor there is a sequence of operations given, which we will call the \emph{program} of the processor.
 Each litmus test has a specified final allowed (or prohibited) state of the variables and registers.
 A run through a litmus test is called an \emph{execution}.
 This final state is found through the concurrent execution of the programs for each processor.
@@ -431,7 +431,7 @@ such that
 
 
 The initialisation of the variables and registers is shown in \Cref{fig:essence-step1}.
-The registers have a special empty/initial value given to them, is different to the value a variable can contain at anytime, including the initial value a variable might contain.
+The registers have a special empty/initial value given to them, which is different to the value a variable can contain at anytime, including the initial value a variable might contain.
 The initial value of a variable might be reassigned to the variables in the course of a program, whereas the initial value of the register cannot be re-attained.
 
 \begin{figure}[t]
@@ -735,7 +735,7 @@ While this observation can be also made for TSO, there are fewer litmus tests wh
 
 \section{Conclusion}
 We have shown that using constraint programming to model MCMs and to use them to generate litmus tests is a viable alternative to algorithms and other tools.
-Using constraint programming is a highly flexible way to re-use the models for different scenarios and different uses.
+Constraint programming is a highly flexible way to re-use the models for different scenarios and different uses.
 We also find that the models created are a lot smaller than what can be created with model checking. As in that context the models face the state explosion problem.
 Our aim with this work is to be able to implement cache coherence protocols along side the MCMs and to directly verify these two models against each other.
 Work in this direction but using model checking and a few additional manual proofs were done in \cite{banks2017verification}.
