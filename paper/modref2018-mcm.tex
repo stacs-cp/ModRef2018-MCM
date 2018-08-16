@@ -99,6 +99,7 @@ The orchestration ensures that the many processors do not interfere with shared 
 A \emph{memory consistency model} (MCM) describes the observed behaviour on the hardware between  processors and memory.
 While a \emph{cache coherence protocol} (CCP) limits the behaviour of the program to mimic the behaviour of the hardware.
 Part of the testing of MCMs and CCPs is to check their executions of \emph{litmus tests}.
+Litmus tests are small program snippets used to stress particular behaviour of MCMs.
 These tests consist of very basic operations between processors and the memory.
 Such operations are storing a value to a variable and loading a variable into a register.
 Depending on the MCM there are more operations such as fences, but for the scope of this paper we will only consider loads and stores.
@@ -385,8 +386,10 @@ find execution :
 \end{figure}
 
 
-We have to tell the model that each operation in the litmus tests can only occur once in the execution.
-In addition, in \Cref{fig:essence2} there is the implied constraint states that very operation in the program is occurring exactly once in an execution then the length of the execution is exactly the number of all operations of all cores in the program.
+In \Cref{fig:essence2} we constrain that every operation in the litmus test can only occur exactly once in the execution.
+Each operation in a litmus test is unique as it has an implicit index.
+So should there be for example two distinct load operations of the same variable into the same register on a core in a litmus test, then those two load operations are treated as distinct in the execution.
+In addition, there is the implied constraint which states that when every operation in the program is occurring exactly once in an execution then the length of the execution is exactly the number of all operations of all cores in the program.
 
 \begin{figure}
 \begin{lstlisting}
@@ -701,6 +704,7 @@ show ghb
 
 \subsection{Litmus Test Generation}
 Having shown that our SC and TSO models are correctly reflecting the behaviour, we have gone further to generate more litmus test using constraint solvers.
+Having a greater number of litmus tests allows for a greater coverage of possible behaviour exhibited by an MCM.
 We produced sets of litmus tests which were given a static number of cores, registers, variables, values and a maximal number of operations per core.
 In addition, we specified the allowed final state of the litmus test.
 We let the solvers generate a set of litmus tests that had at least one valid execution in TSO with the allowed final state.
